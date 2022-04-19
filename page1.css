@@ -1,0 +1,135 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+}
+
+body {
+    background-color: #FAFAFA;
+}
+
+.page1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 146px 18px 0;
+    height: 100%;
+}
+
+.quiz {
+    width: 100%;
+    max-width: 1051px;
+}
+.quiz h2 {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
+    color: #000000;
+}
+.quiz--novo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    border: 1px dashed #D5D5D5;
+    border-radius: 5px;
+    margin-bottom: 76px;
+    height: 181px;
+    background: #FAFAFA;
+}
+.quiz--novo p {
+    width: 100%;
+    max-width: 250px;
+    text-align: center;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 23px;
+    color: #B9B9B9;
+}
+.quiz--novo .button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px dashed #EC362D;
+    border-radius: 50px;
+    height: 40px;
+    width: 151px;
+    font-weight: 400;
+    font-size: 21px;
+    line-height: 25px;
+    color: #EC362D;
+}
+
+.quiz--usuario {
+    margin-bottom: 48px;
+}
+.quiz--usuario .cabecalho {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+.quiz--usuario ion-icon {
+    border-radius: 500px;
+    margin-left: 18px;
+    font-size: 30px;
+    color: #EC362D;
+}
+
+.quiz__lista {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.quizz{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    margin-top: 12px;
+    height: 181px;
+    width: 100%;
+    max-width: 340px;
+    background-color: #EC362D;
+}
+.quizz img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+.quizz .gradiente {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 64.58%, #000000 100%)
+}
+.quizz h3 {
+    z-index: 1;
+    position: absolute;
+    bottom: 8px;
+    word-wrap: break-word;
+    width: 90%;
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 22px;
+    color: #FFFFFF;
+}
+
+@media (max-width: 1000px) {
+    .page1 {
+        margin-top: 100px;
+    }
+    .quiz--novo {
+        margin-bottom: 36px;
+    }
+    .quiz--usuario {
+        margin-bottom: 38px;
+    }
+    .quiz--usuario .cabecalho {
+        justify-content: space-between;
+    }
+    .quiz__lista {
+        justify-content: center;
+    }
+}

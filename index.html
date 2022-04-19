@@ -9,17 +9,118 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="page1.css">
     <link rel="stylesheet" href="page2.css">
+    <link rel="stylesheet" href="page3.css">
 </head>
-<body class="page2">
+<body>
     <header><h1>BuzzQuizz</h1></header>
-    <main>
+    <main class="page1 escondido">
+        <div class="quiz quiz--novo">
+            <p>Você não criou nenhum quizz ainda :(</p>
+            <div class="button">Criar Quizz</div>
+        </div>
+        <div class="quiz quiz--usuario">
+            <div class="cabecalho">
+                <h2>Seus Quizzes</h2>
+                <ion-icon name="add-circle"></ion-icon>
+            </div>
+            <ul class="quiz__lista">
+                <li class="quizz"><img src="lofi.jpg" alt=""><div class="gradiente"></div><h3>Título do Quiz</h3></li>
+            </ul>
+        </div>
+        <div class="quiz quiz--todos">
+            <h2>Todos os Quizzes</h2>
+            <ul class="quiz__lista">
+            </ul>
+        </div>
+        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    </main>
+    <main class="page2">
         <li class="quizzTitle">
             <img src="hogwarts-castle-.jpg" alt="qualquersa">
             <div><h2>O quão Potterhead você é?</h2></div>
         </li>
         <div class="quizz">
             
+        </div>
+    </main>
+    <main class="page3 escondido">
+        <div class="etapa etapa--inicial escondido">
+            <h2>Comece pelo começo</h2>
+            <div class="bloco">
+                <input class="titulo" type="text" placeholder="Título do seu quizz">
+                <input class="img-url" type="text" placeholder="URL da imagem do seu quizz">
+                <input class="numero-perguntas" type="text" placeholder="Quantidade de perguntas do quizz">
+                <input class="numero-niveis" type="text" placeholder="Quantidade de níveis do quizz">
+            </div>
+            <div class="button button--avancar">Prosseguir pra criar perguntas</div>
+        </div>
+        <div class="etapa etapa--perguntas escondido">
+            <h2>Crie suas perguntas</h2>
+            <div class="bloco">
+                <div class="sub-bloco sub-bloco--nome">
+                    <h3>Pergunta 1</h3>
+                    <ion-icon name="create-outline"></ion-icon>
+                </div>
+                <div class="sub-bloco escondido">
+                    <div class="forms forms--nome">
+                        <h3>Pergunta 1</h3>
+                        <input type="text" placeholder="Texto da pergunta">
+                        <input type="text" placeholder="Cor de fundo da pergunta">
+                    </div>
+                    <div class="forms forms--respostas-corretas">
+                        <h3>Respostas corretas</h3>
+                        <div class="forms__resposta">
+                            <input type="text" placeholder="Resposta correta">
+                            <input type="text" placeholder="URL da imagem">
+                        </div>
+                    </div>
+                    <div class="forms forms--respostas-incorretas">
+                        <h3>Respostas incorretas</h3>
+                        <div class="forms__resposta">
+                            <input type="text" placeholder="Resposta incorreta 1">
+                            <input type="text" placeholder="URL da imagem 1">
+                        </div>
+                        <div class="forms__resposta">
+                            <input type="text" placeholder="Resposta incorreta 1">
+                            <input type="text" placeholder="URL da imagem 1">
+                        </div>
+                        <div class="forms__resposta">
+                            <input type="text" placeholder="Resposta incorreta 1">
+                            <input type="text" placeholder="URL da imagem 1">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="button button--avancar">Prosseguir pra criar níveis</div>
+        </div>
+        <div class="etapa etapa--niveis escondido">
+            <h2>Agora, decida os níveis!</h2>
+            <div class="bloco">
+                <div class="sub-bloco sub-bloco--nome">
+                    <h3>Nível 1</h3>
+                    <ion-icon name="create-outline"></ion-icon>
+                </div>
+                <div class="sub-bloco escondido">
+                    <div class="forms forms--nome">
+                        <h3>Nível 1</h3>
+                        <input type="text" placeholder="Título do nível">
+                        <input type="text" placeholder="% de acerto mínima">
+                        <input type="text" placeholder="URL da imagem do nível">
+                        <!-- input nao da line break, procurar solucao-->
+                        <input type="text" placeholder="Descrição do nível">
+                    </div>
+                </div>
+            </div>
+            <div class="button button--avancar">Finalizar Quizz</div>
+        </div>
+        <div class="etapa etapa--final">
+            <h2>Seu quizz está pronto!</h2>
+            <div class="quizz"><img src="lofi.jpg" alt=""><div class="gradiente"></div><h3>Título do Quiz</h3></div>
+            <div class="button button--avancar">Acessar Quizz</div>
+            <div class="button button--retornar">Acessar Quizz</div>
         </div>
     </main>
 </body>

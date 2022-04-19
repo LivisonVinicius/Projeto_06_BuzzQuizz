@@ -19,7 +19,7 @@ header{
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     z-index: 1;
 }
-body.page2{
+body{
     font-family: 'Roboto', sans-serif;
     background-color: #fafafa;
 }
@@ -51,7 +51,8 @@ body.page2{
     justify-content: center;
     align-items: center;
 }
-main{
+/* arrumar main */
+.page2{
     display: flex;
     width: 100%;
     height: 100%;
