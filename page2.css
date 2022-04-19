@@ -1,0 +1,101 @@
+*{
+    box-sizing: border-box;
+}
+header{
+    width: 100%;
+    height: 69px;
+    background: #EC362D;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 37px;
+    font-weight: 700;
+    line-height: 43px;
+    letter-spacing: 0em;
+    color: #ffffff;
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    z-index: 1;
+}
+body.page2{
+    font-family: 'Roboto', sans-serif;
+    background-color: #fafafa;
+}
+.quizzTitle{
+    font-size: 39px;
+    font-weight: 400;
+    line-height: 46px;
+    letter-spacing: 0em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 227px;
+    margin-top: 69px;
+    position: relative;
+}
+.quizzTitle img{
+    width: 100%;
+    height: 227px;
+    object-fit:cover;
+}
+.quizzTitle div{
+    position: absolute;
+    color: #ffffff;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.57), rgba(0, 0, 0, 0.57));
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+main{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+}
+.quizQuestion{
+    width: 759px;
+    height: 676px;
+    box-shadow:0px 6px 38px rgba(0, 0, 0, 0.23);
+    padding: 36px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 42px;
+}
+.quizQuestion img{
+    width: 330px;
+    height: 175px;
+}
+.quizQuestion h3{
+    display: flex;
+    width: 688px;
+    height: 138px;
+    background: #434CA0;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    font-size: 23px;
+    font-weight: 700;
+    line-height: 27px;
+    letter-spacing: 0em;
+}
+li{
+    list-style-type: none;
+}
+.quizQuestion h4{
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 23px;
+    letter-spacing: 0em;
+    text-align: left;
+    margin: 10px 0px 0px 0px;
+}
+.quizQuestion div{
+    margin-top: 20px;
+}
