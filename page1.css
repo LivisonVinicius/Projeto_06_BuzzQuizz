@@ -81,7 +81,7 @@ body {
     flex-wrap: wrap;
     width: 100%;
 }
-.quizz{
+.page1 .quizz{
     position: relative;
     display: flex;
     justify-content: center;
@@ -91,12 +91,12 @@ body {
     max-width: 340px;
     background-color: #EC362D;
 }
-.quizz img {
+.page1 .quizz img {
     height: 100%;
     width: 100%;
     object-fit: cover;
 }
-.quizz .gradiente {
+.page1 .quizz .gradiente {
     position: absolute;
     top: 0;
     left: 0;
@@ -104,7 +104,7 @@ body {
     height: 100%;
     background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 64.58%, #000000 100%)
 }
-.quizz h3 {
+.page1 .quizz h3 {
     z-index: 1;
     position: absolute;
     bottom: 8px;
