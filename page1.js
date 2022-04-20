@@ -43,16 +43,3 @@ function trocarTela2Tela3() {
     document.querySelector(".page2").classList.toggle("escondido");
     document.querySelector(".page3").classList.toggle("escondido");
 }
-
-function trocarEtapaI() {
-    document.querySelector(".etapa--inicial").classList.toggle("escondido");
-    document.querySelector(".etapa--perguntas").classList.toggle("escondido");
-}
-function trocarEtapaII() {
-    document.querySelector(".etapa--perguntas").classList.toggle("escondido");
-    document.querySelector(".etapa--niveis").classList.toggle("escondido");
-}
-function trocarEtapaIII() {
-    document.querySelector(".etapa--niveis").classList.toggle("escondido");
-    document.querySelector(".etapa--final").classList.toggle("escondido");
-}
