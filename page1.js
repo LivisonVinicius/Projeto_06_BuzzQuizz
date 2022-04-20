@@ -59,15 +59,3 @@ function renderizarQuizzesTodos(quizzesServidor) {
     }
 }
 
-function trocarTela1Tela2() {
-    document.querySelector(".page1").classList.toggle("escondido");
-    document.querySelector(".page2").classList.toggle("escondido");
-}
-function trocarTela1Tela3() {
-    document.querySelector(".page1").classList.toggle("escondido");
-    document.querySelector(".page3").classList.toggle("escondido");
-}
-function trocarTela2Tela3() {
-    document.querySelector(".page2").classList.toggle("escondido");
-    document.querySelector(".page3").classList.toggle("escondido");
-}

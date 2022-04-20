@@ -69,10 +69,10 @@ function renderizarEtapaII() {
     for (var i = 0 ; i < numeroPerguntas ; i ++) {
         etapa.innerHTML += 
        `<div class="bloco">
-            <div class="sub-bloco sub-bloco--nome">
-                <h3>Pergunta ${i + 1}</h3><ion-icon name="create-outline"></ion-icon>
+            <div class="sub-bloco">
+                <h3>Pergunta ${i + 1}</h3><ion-icon onclick="selecionarPergunta(this)" name="create-outline"></ion-icon>
             </div>
-            <div class="sub-bloco escondido">
+            <div class="sub-bloco">
                 <div class="forms forms--nome">
                     <h3>Pergunta ${i + 1}</h3>
                     <input type="text" placeholder="Texto da pergunta">
@@ -105,6 +105,13 @@ function renderizarEtapaII() {
     }
     etapa.innerHTML += `<div class="button button--avancar" onclick="trocarEtapaII()">Prosseguir pra criar níveis</div>`
 }
+function selecionarPergunta(perguntaClicada) {
+    const perguntaSelecionada = document.querySelector(".etapa--perguntas .bloco.selecionado");
+    if (perguntaSelecionada !== null) {
+        perguntaSelecionada.classList.remove("selecionado");
+    }
+    perguntaClicada.closest(".bloco").classList.add("selecionado");
+}
 function trocarEtapaII() {
     if (validarEtapaII()) {
         renderizarEtapaIII();
@@ -127,10 +134,10 @@ function renderizarEtapaIII() {
     for (var i = 0 ; i < numeroNiveis ; i ++) {
         etapa.innerHTML += 
        `<div class="bloco">
-            <div class="sub-bloco sub-bloco--nome">
-                <h3>Nível ${i + 1}</h3><ion-icon name="create-outline"></ion-icon>
+            <div class="sub-bloco">
+                <h3>Nível ${i + 1}</h3><ion-icon onclick="selecionarNivel(this)" name="create-outline"></ion-icon>
             </div>
-            <div class="sub-bloco escondido">
+            <div class="sub-bloco">
                 <div class="forms forms--nome">
                     <h3>Nível ${i + 1}</h3>
                     <input type="text" placeholder="Título do nível">
@@ -142,6 +149,13 @@ function renderizarEtapaIII() {
         </div>`
     }
     etapa.innerHTML += `<div class="button button--avancar" onclick="trocarEtapaIII()">FinalizarQuiz</div>`
+}
+function selecionarNivel(nivelClicado) {
+    const nivelSelecionado = document.querySelector(".etapa--niveis .bloco.selecionado");
+    if (nivelSelecionado !== null) {
+        nivelSelecionado.classList.remove("selecionado");
+    }
+    nivelClicado.closest(".bloco").classList.add("selecionado");
 }
 function trocarEtapaIII() {
     if (validarEtapaIII()) {

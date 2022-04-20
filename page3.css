@@ -124,8 +124,14 @@ input::placeholder {
     max-width: 500px;
 }
 
-.escondido {
+.sub-bloco:nth-of-type(2) {
     display: none;
+}
+.selecionado .sub-bloco:nth-of-type(1) {
+    display: none;
+}
+.selecionado .sub-bloco:nth-of-type(2) {
+    display: initial;
 }
 
 @media (max-width: 1000px) {
