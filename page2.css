@@ -123,3 +123,26 @@ li{
 .resposta.falsy h4{
     color: #FF4B4B;
 }
+.finalDoJogo{
+    width: 759px;
+    height: auto;
+    box-shadow:0px 6px 38px rgba(0, 0, 0, 0.23);
+    padding: 36px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 42px;
+}
+.finalDoJogo h3{
+    display: flex;
+    width: 688px;
+    height: 138px;
+    background: #434CA0;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    font-size: 23px;
+    font-weight: 700;
+    line-height: 27px;
+    letter-spacing: 0em;
+}

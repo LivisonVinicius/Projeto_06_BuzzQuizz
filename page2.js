@@ -4,6 +4,7 @@ let salvaPromisse;
 let respostaSelector;
 let promise;
 let questionSelector;
+let pontuacao=0;
 function geraQuiz(){
     promise=axios.get('https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes')
     promise.then(function(response){
@@ -48,16 +49,18 @@ function geraQuiz(){
     })
 }
 function selecionaResposta(selecionada,localPergunta){
+    
     let contadorLoop=0
-    let posicaoPergunta=localPergunta.slice(8)
+    let posicaoPergunta=Number(localPergunta.slice(8))
     if(document.querySelectorAll(`.${localPergunta} .esbraquicado`).length != 0){
         return
     }
     while(contadorLoop < document.querySelectorAll(`.${localPergunta} > *`).length-1){
         document.querySelector(`.${localPergunta} .resposta${contadorLoop}`).classList.add("esbraquicado")
-        switch(questionSelector[Number(posicaoPergunta)].answers[contadorLoop].isCorrectAnswer){
+        switch(questionSelector[posicaoPergunta].answers[contadorLoop].isCorrectAnswer){
             case true:
                 document.querySelector(`.${localPergunta} .resposta${contadorLoop}`).classList.add("truthy")
+                pontuacao++
                 break
             case false:
                 document.querySelector(`.${localPergunta} .resposta${contadorLoop}`).classList.add("falsy")
@@ -65,7 +68,20 @@ function selecionaResposta(selecionada,localPergunta){
         contadorLoop++
     }
     selecionada.classList.remove("esbraquicado")
+
+    setTimeout(scrollNext,2000,document.querySelector(`.pergunta${posicaoPergunta+1}`))
 }
 function parametro(){
     return Math.random()-0.5;
+}
+function scrollNext(local){
+    if (local!== null){
+        local.scrollIntoView({behavior : "smooth", block : "end"})
+    }else{
+        document.querySelector(".page2").innerHTML+=`
+        <div>
+        `
+    }
+
+
 }
