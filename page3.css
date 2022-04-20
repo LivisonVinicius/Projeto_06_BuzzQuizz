@@ -116,6 +116,11 @@ input::placeholder {
     display: flex;
     flex-direction: column;
 }
+.page3 .quizz{
+    height: 266px;
+    width: 100%;
+    max-width: 500px;
+}
 
 .escondido {
     display: none;
@@ -127,5 +132,8 @@ input::placeholder {
     }
     .etapa .button--avancar {
         margin-top: 30px;
+    }
+    .quizz {
+        max-width: 340px;
     }
 }

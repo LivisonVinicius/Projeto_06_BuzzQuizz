@@ -16,7 +16,7 @@
 <body>
     <header><h1>BuzzQuizz</h1></header>
     <!-- Página 1 -->
-    <main class="page1 escondido">
+    <main class="page1">
         <div class="quiz quiz--novo">
             <p>Você não criou nenhum quizz ainda :(</p>
             <div class="button">Criar Quizz</div>
@@ -26,15 +26,13 @@
                 <h2>Seus Quizzes</h2>
                 <ion-icon name="add-circle"></ion-icon>
             </div>
-            <ul class="quiz__lista">
-                <li class="quizz"><img src="lofi.jpg" alt=""><div class="gradiente"></div><h3>Título do Quiz</h3></li>
-            </ul>
+            <ul class="quiz__lista"></ul>
+            <!-- <ul class="quiz__lista"><li class="quizz"><img src="lofi.jpg" alt=""><div class="gradiente"></div><h3>Título do Quiz</h3></li></ul> -->
         </div>
         <div class="quiz quiz--todos">
             <h2>Todos os Quizzes</h2>
-            <ul class="quiz__lista">
-                <li class="quizz"><img src="lofi.jpg" alt=""><div class="gradiente"></div><h3>Título do Quiz</h3></li>
-            </ul>
+            <ul class="quiz__lista"></ul>
+            <!-- <ul class="quiz__lista"><li class="quizz"><img src="lofi.jpg" alt=""><div class="gradiente"></div><h3>Título do Quiz</h3></li></ul> -->
         </div>
         <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
@@ -52,7 +50,7 @@
     </main>
     <!-- Página 2 -->
     <!-- Página 3 -->
-    <main class="page3">
+    <main class="page3 escondido">
         <div class="etapa etapa--inicial escondido">
             <h2>Comece pelo começo</h2>
             <div class="bloco">
@@ -130,7 +128,8 @@
         </div>
     </main>
     <!-- Página 3 -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="page1.js"></script>
+    <script src="page2.js"></script>
 </body>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="page2.js"></script>
 </html>

@@ -17,9 +17,10 @@ body {
     height: 100%;
 }
 
+/* rever max-width, no figma tá 1051px, mas da problema com margin do .quizz */
 .quiz {
     width: 100%;
-    max-width: 1051px;
+    max-width: 1070px;
 }
 .quiz h2 {
     font-weight: 700;
@@ -78,19 +79,17 @@ body {
 
 .quiz__lista {
     display: flex;
-    justify-content: space-between;
     flex-wrap: wrap;
     width: 100%;
 }
-.page1 .quizz{
+.quizz{
     position: relative;
     display: flex;
     justify-content: center;
-    margin-top: 12px;
+    margin: 12px 14px 0 0;
     height: 181px;
     width: 100%;
     max-width: 340px;
-    background-color: #EC362D;
 }
 .quizz img {
     height: 100%;
