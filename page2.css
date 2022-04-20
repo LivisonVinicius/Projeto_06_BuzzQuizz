@@ -60,7 +60,7 @@ body{
 }
 .quizQuestion{
     width: 759px;
-    height: 676px;
+    height: auto;
     box-shadow:0px 6px 38px rgba(0, 0, 0, 0.23);
     padding: 36px;
     display: flex;
