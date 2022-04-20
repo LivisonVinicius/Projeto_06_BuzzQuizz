@@ -89,19 +89,37 @@ li{
     list-style-type: none;
 }
 .quizQuestion h4{
+    width: 100%;
     font-size: 20px;
     font-weight: 700;
     line-height: 23px;
     letter-spacing: 0em;
     text-align: left;
     margin: 10px 0px 0px 0px;
+    word-wrap:break-word;
 }
 .quizQuestion > div{
     margin-top: 20px;
 }
+.resposta{
+    max-width: 331px;
+}
+.esbraquicado{
+    opacity: 0.3;
+}
+
 /* @media screen and (max-width:1100px) {
     .quizQuestion{
         width: 100%;
     }
     
 } */
+.escondido{
+    display: none;
+}
+.resposta.truthy h4{
+    color: #009C22;
+}
+.resposta.falsy h4{
+    color: #FF4B4B;
+}
