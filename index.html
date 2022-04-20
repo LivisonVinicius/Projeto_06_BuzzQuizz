@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,112 +17,20 @@
 <body>
     <header><h1>BuzzQuizz</h1></header>
     <!-- Página 1 -->
-    <main class="page1 escondido">
-        <div class="quiz quiz--novo">
-            <p>Você não criou nenhum quizz ainda :(</p>
-            <div class="button">Criar Quizz</div>
-        </div>
-        <div class="quiz quiz--usuario">
-            <div class="cabecalho">
-                <h2>Seus Quizzes</h2>
-                <ion-icon name="add-circle"></ion-icon>
-            </div>
-            <ul class="quiz__lista"></ul>
-            <!-- <ul class="quiz__lista"><li class="quizz"><img src="lofi.jpg" alt=""><div class="gradiente"></div><h3>Título do Quiz</h3></li></ul> -->
-        </div>
-        <div class="quiz quiz--todos">
-            <h2>Todos os Quizzes</h2>
-            <ul class="quiz__lista"></ul>
-            <!-- <ul class="quiz__lista"><li class="quizz"><img src="lofi.jpg" alt=""><div class="gradiente"></div><h3>Título do Quiz</h3></li></ul> -->
-        </div>
-        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-        <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-    </main>
+    <main class="page1"></main>
     <!-- Página 1 -->
     <!-- Página 2 -->
-    <main class="page2"></main>
+    <main class="page2 escondido"></main>
     <!-- Página 2 -->
     <!-- Página 3 -->
     <main class="page3 escondido">
-        <div class="etapa etapa--inicial escondido">
-            <h2>Comece pelo começo</h2>
-            <div class="bloco">
-                <input class="titulo" type="text" placeholder="Título do seu quizz">
-                <input class="img-url" type="text" placeholder="URL da imagem do seu quizz">
-                <input class="numero-perguntas" type="text" placeholder="Quantidade de perguntas do quizz">
-                <input class="numero-niveis" type="text" placeholder="Quantidade de níveis do quizz">
-            </div>
-            <div class="button button--avancar">Prosseguir pra criar perguntas</div>
-        </div>
-        <div class="etapa etapa--perguntas escondido">
-            <h2>Crie suas perguntas</h2>
-            <div class="bloco">
-                <div class="sub-bloco sub-bloco--nome">
-                    <h3>Pergunta 1</h3>
-                    <ion-icon name="create-outline"></ion-icon>
-                </div>
-                <div class="sub-bloco escondido">
-                    <div class="forms forms--nome">
-                        <h3>Pergunta 1</h3>
-                        <input type="text" placeholder="Texto da pergunta">
-                        <input type="text" placeholder="Cor de fundo da pergunta">
-                    </div>
-                    <div class="forms forms--respostas-corretas">
-                        <h3>Respostas corretas</h3>
-                        <div class="forms__resposta">
-                            <input type="text" placeholder="Resposta correta">
-                            <input type="text" placeholder="URL da imagem">
-                        </div>
-                    </div>
-                    <div class="forms forms--respostas-incorretas">
-                        <h3>Respostas incorretas</h3>
-                        <div class="forms__resposta">
-                            <input type="text" placeholder="Resposta incorreta 1">
-                            <input type="text" placeholder="URL da imagem 1">
-                        </div>
-                        <div class="forms__resposta">
-                            <input type="text" placeholder="Resposta incorreta 1">
-                            <input type="text" placeholder="URL da imagem 1">
-                        </div>
-                        <div class="forms__resposta">
-                            <input type="text" placeholder="Resposta incorreta 1">
-                            <input type="text" placeholder="URL da imagem 1">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="button button--avancar">Prosseguir pra criar níveis</div>
-        </div>
-        <div class="etapa etapa--niveis escondido">
-            <h2>Agora, decida os níveis!</h2>
-            <div class="bloco">
-                <div class="sub-bloco sub-bloco--nome">
-                    <h3>Nível 1</h3>
-                    <ion-icon name="create-outline"></ion-icon>
-                </div>
-                <div class="sub-bloco escondido">
-                    <div class="forms forms--nome">
-                        <h3>Nível 1</h3>
-                        <input type="text" placeholder="Título do nível">
-                        <input type="text" placeholder="% de acerto mínima">
-                        <input type="text" placeholder="URL da imagem do nível">
-                        <!-- input nao da line break, procurar solucao-->
-                        <input type="text" placeholder="Descrição do nível">
-                    </div>
-                </div>
-            </div>
-            <div class="button button--avancar">Finalizar Quizz</div>
-        </div>
-        <div class="etapa etapa--final">
-            <h2>Seu quizz está pronto!</h2>
-            <div class="quizz"><img src="lofi.jpg" alt=""><div class="gradiente"></div><h3>Título do Quiz</h3></div>
-            <div class="button button--avancar">Acessar Quizz</div>
-            <div class="button button--retornar">Acessar Quizz</div>
-        </div>
     </main>
     <!-- Página 3 -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="page1.js"></script>
     <script src="page2.js"></script>
+    <script src="page3.js"></script>
 </body>
 </html>

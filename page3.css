@@ -2,10 +2,10 @@ input {
     border: 1px solid #D1D1D1;
     border-radius: 5px;
     height: 46px;
+    width: 100%;
     font-weight: 400;
     font-size: 19px;
     line-height: 22px;
-    word-wrap: break-word;
 }
 input:focus::placeholder {
     color: transparent;
@@ -43,6 +43,7 @@ input::placeholder {
     display: flex;
     justify-content: center;
     align-items: center;
+    border: none;
     border-radius: 15px;
     height: 54px;
     width: 100%;
@@ -50,6 +51,7 @@ input::placeholder {
     font-weight: 400;
     font-size: 18px;
     line-height: 21px;
+    cursor: pointer;
 }
 .etapa .button--avancar {
     margin-top: 80px;
@@ -60,13 +62,14 @@ input::placeholder {
     margin-top: 12px;
     color: #818181;
 }
-.bloco {
+.bloco{
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
+    align-items: center;
+    padding: 28px 16px;
     width: 100%;
-    max-width: 600px;
+    max-width: 600px; 
+    background-color: #FFFFFF;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
 }
 .bloco ~ .bloco {
@@ -83,14 +86,13 @@ input::placeholder {
 }
 /* sub-bloco position absolute not working */
 .sub-bloco {
-    padding: 28px 16px;
     width: 100%;
-    background-color: #FFFFFF;
 }
 .sub-bloco ion-icon {
     font-size: 26px;
+    cursor: pointer;
 }
-.sub-bloco--nome {
+.bloco .sub-bloco:nth-of-type(1) {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -122,8 +124,14 @@ input::placeholder {
     max-width: 500px;
 }
 
-.escondido {
+.sub-bloco:nth-of-type(2) {
     display: none;
+}
+.selecionado .sub-bloco:nth-of-type(1) {
+    display: none;
+}
+.selecionado .sub-bloco:nth-of-type(2) {
+    display: initial;
 }
 
 @media (max-width: 1000px) {

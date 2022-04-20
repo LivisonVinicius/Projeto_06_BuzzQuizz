@@ -60,6 +60,7 @@ body {
     font-size: 21px;
     line-height: 25px;
     color: #EC362D;
+    cursor: pointer;
 }
 
 .quiz--usuario {
@@ -75,6 +76,7 @@ body {
     margin-left: 18px;
     font-size: 30px;
     color: #EC362D;
+    cursor: pointer;
 }
 
 .quiz__lista {
