@@ -152,28 +152,29 @@ function geraQuiz(){
     counter=0;
     counterRespostas=0;
     let apiSelector=objeto[0].questions;
-    let containerQuiz=document.querySelector(".quizz");
+    let containerQuiz=document.querySelector(".page2 .quizz");
+    let pergunta;
     while (counter < apiSelector.length){
         // esse 0 vai ser o id
+        counterRespostas=0
         containerQuiz.innerHTML+=`
         <li class="quizQuestion pergunta${counter}">
         <h3>${apiSelector[counter].title}</h3>
         </li>
         `
-        let pergunta=document.querySelector(`pergunta${0}`);
+        while(counterRespostas < apiSelector[counter].answers.length){
+            pergunta=document.querySelector(`.pergunta${counter}`);
+            pergunta.innerHTML +=`
+                <div>
+                    <img src="${apiSelector[counter].answers[counterRespostas].image}" alt="opção${counterRespostas}">
+                    <h4>${apiSelector[counter].answers[counterRespostas].text}</h4>
+                </div>
+            `
+            counterRespostas++
+        }
         counter++
     }
     counter=0
-    while(counterRespostas < apiSelector[counter].answers.length){
-        pergunta=document.querySelector(`pergunta${counter}`);
-        pergunta.innerHTML +=`
-        <div>
-        <img src="${apiSelector[counter].answers[counterRespostas].image}" alt="opção${counterRespostas}">
-        <h4>${apiSelector[counter].answers[counterRespostas].text}</h4>
-        </div>
-        `
-        pergunta=document.querySelector(`pergunta${counter}`);
-        counterRespostas++
-    }
+    
 
 }
