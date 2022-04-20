@@ -96,6 +96,12 @@ li{
     text-align: left;
     margin: 10px 0px 0px 0px;
 }
-.quizQuestion div{
+.quizQuestion > div{
     margin-top: 20px;
 }
+/* @media screen and (max-width:1100px) {
+    .quizQuestion{
+        width: 100%;
+    }
+    
+} */
