@@ -2,7 +2,7 @@
 const body = document.querySelector("body");
 let page1;
 
-carregarPagina1();
+// carregarPagina1();
 
 function carregarPagina1() {
     body.innerHTML = 
