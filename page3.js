@@ -1,4 +1,5 @@
 let titulo, imgURL, numeroPerguntas, numeroNiveis;
+let perguntasTextos, perguntasCores, perguntasRespostas;
 let page3;
 
 function carregarPagina3() {
@@ -7,7 +8,24 @@ function carregarPagina3() {
         <main class="page3"></main>`
     page3 = document.querySelector(".page3");
 
+    resetarVariaveisEtapaI();
+    resetarVariaveisEtapaII();
+
     renderizarEtapaI();
+}
+
+function resetarVariaveisEtapaI() {
+    titulo = "";
+    imgURL = "";
+    numeroPerguntas = 0;
+    numeroNiveis = 0;
+}
+
+function resetarVariaveisEtapaII() {
+    perguntasTextos = [];
+    perguntasCores = []; 
+    perguntasRespostasTexto = [];
+    perguntasRespostasImagem = [];
 }
 
 //ETAPA I //
@@ -33,6 +51,7 @@ function trocarEtapaI() {
     }
 }
 function validarEtapaI() {
+    resetarVariaveisEtapaI();
     titulo = document.querySelector(".etapa--inicial .titulo").value;
     numeroPerguntas = Number(document.querySelector(".etapa--inicial .numero-perguntas").value);
     numeroNiveis = Number(document.querySelector(".etapa--inicial .numero-niveis").value);
@@ -40,6 +59,7 @@ function validarEtapaI() {
     if (titulo.length < 20 || titulo.length > 65) {
         return false;
     } 
+    // talvez criar uma função só para validar URL de imagem
     try {
         imgURL = new URL(document.querySelector(".etapa--inicial .img-url").value);
     } catch (_) {
@@ -55,6 +75,10 @@ function validarEtapaI() {
         return false;
     }
     return true;
+}
+
+function validarURLImagem() {
+    
 }
 
 
@@ -76,28 +100,28 @@ function renderizarEtapaII() {
                 <div class="forms forms--nome">
                     <h3>Pergunta ${i + 1}</h3>
                     <input type="text" placeholder="Texto da pergunta">
-                    <input type="text" placeholder="Cor de fundo da pergunta">
+                    <input type="color" placeholder="Cor de fundo da pergunta">
                 </div>
                 <div class="forms forms--respostas-corretas">
                     <h3>Respostas corretas</h3>
                     <div class="forms__resposta">
                         <input type="text" placeholder="Resposta correta">
-                        <input type="text" placeholder="URL da imagem">
+                        <input type="url" placeholder="URL da imagem">
                     </div>
                 </div>
                 <div class="forms forms--respostas-incorretas">
                     <h3>Respostas incorretas</h3>
                     <div class="forms__resposta">
                         <input type="text" placeholder="Resposta incorreta 1">
-                        <input type="text" placeholder="URL da imagem 1">
+                        <input type="url" placeholder="URL da imagem 1">
                     </div>
                     <div class="forms__resposta">
                         <input type="text" placeholder="Resposta incorreta 2">
-                        <input type="text" placeholder="URL da imagem 2">
+                        <input type="url" placeholder="URL da imagem 2">
                     </div>
                     <div class="forms__resposta">
                         <input type="text" placeholder="Resposta incorreta 3">
-                        <input type="text" placeholder="URL da imagem 3">
+                        <input type="url" placeholder="URL da imagem 3">
                     </div>
                 </div>
             </div>
@@ -106,7 +130,7 @@ function renderizarEtapaII() {
     etapa.innerHTML += `<div class="button button--avancar" onclick="trocarEtapaII()">Prosseguir pra criar níveis</div>`
 }
 function selecionarPergunta(perguntaClicada) {
-    const perguntaSelecionada = document.querySelector(".etapa--perguntas .bloco.selecionado");
+    const perguntaSelecionada = document.querySelector(".etapa--perguntas .selecionado");
     if (perguntaSelecionada !== null) {
         perguntaSelecionada.classList.remove("selecionado");
     }
@@ -120,6 +144,60 @@ function trocarEtapaII() {
     }
 }
 function validarEtapaII() {
+    resetarVariaveisEtapaII();
+    const perguntas = document.querySelectorAll(".bloco .sub-bloco:nth-of-type(2)");
+    for (var i = 0 ; i < perguntas.length ; i ++) {
+        const perguntaTexto = perguntas[i].querySelector(".forms--nome input:nth-of-type(1)").value;
+        if (perguntaTexto.length < 20) {
+            return false;
+        }
+        perguntasTextos.push(perguntaTexto);
+        
+        // descobrir como impedir que o usuário escolha uma cor parecida com a cor do texto da pergunta (branco)
+        const perguntaCor = perguntas[i].querySelector(".forms--nome input:nth-of-type(2)").value;
+        perguntasCores.push(perguntaCor);
+
+        const respostaCorreta = perguntas[i].querySelector(".forms--respostas-corretas .forms__resposta");
+        const respostaCorretaTexto = respostaCorreta.querySelector("input:nth-of-type(1)").value;
+        let respostaCorretaImagem = respostaCorreta.querySelector("input:nth-of-type(2)").value;
+        if (respostaCorretaTexto === "" || respostaCorretaImagem === "") {
+            return false;
+        }
+        try {
+            respostaCorretaImagem = new URL(respostaCorretaImagem);
+        } catch (_) {
+            return false;  
+        }
+        if (!(/\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(respostaCorretaImagem))) {
+            return false;
+        }
+        perguntasRespostasTexto.push(respostaCorretaTexto);
+        perguntasRespostasImagem.push(respostaCorretaImagem);
+        
+        const respostasIncorretas = perguntas[i].querySelectorAll(".forms--respostas-incorretas .forms__resposta");
+        let respostaIncorretaTexto, respostaIncorretaImagem;
+        for (var x = 0 ; x < respostasIncorretas.length ; x ++) {
+            respostaIncorretaTexto = respostasIncorretas[x].querySelector("input:nth-of-type(1)").value;
+            respostaIncorretaImagem = respostasIncorretas[x].querySelector("input:nth-of-type(2)").value;
+            if (respostaIncorretaTexto === "" || respostaIncorretaImagem === "") {
+                continue;
+            } else {
+                try {
+                    respostaIncorretaImagem = new URL(respostaIncorretaImagem);
+                } catch (_) {
+                    return false;  
+                }
+                if (!(/\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(respostaIncorretaImagem))) {
+                    return false;
+                }
+                perguntasRespostasTexto.push(respostaCorretaTexto);
+                perguntasRespostasImagem.push(respostaCorretaImagem);
+            }
+        }
+        if (perguntasRespostasTexto.length === 1 || perguntasRespostasImagem.length === 1) {
+            return false;
+        }
+    }
     return true;
 }
 
@@ -142,7 +220,7 @@ function renderizarEtapaIII() {
                     <h3>Nível ${i + 1}</h3>
                     <input type="text" placeholder="Título do nível">
                     <input type="text" placeholder="% de acerto mínima">
-                    <input type="text" placeholder="URL da imagem do nível">
+                    <input type="url" placeholder="URL da imagem do nível">
                     <input type="text" placeholder="Descrição do nível">
                 </div>
             </div>
@@ -151,7 +229,7 @@ function renderizarEtapaIII() {
     etapa.innerHTML += `<div class="button button--avancar" onclick="trocarEtapaIII()">FinalizarQuiz</div>`
 }
 function selecionarNivel(nivelClicado) {
-    const nivelSelecionado = document.querySelector(".etapa--niveis .bloco.selecionado");
+    const nivelSelecionado = document.querySelector(".etapa--niveis .selecionado");
     if (nivelSelecionado !== null) {
         nivelSelecionado.classList.remove("selecionado");
     }
