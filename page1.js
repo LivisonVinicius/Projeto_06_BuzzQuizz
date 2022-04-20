@@ -1,33 +1,40 @@
-carregarPagina();
+// ideia para depois, em vez de deixar a classe escondido nas paginas zerar o body e gerar o main .page do 0
+const body = document.querySelector("body");
+let page1;
 
-function carregarPagina() {
+carregarPagina1();
+
+function carregarPagina1() {
+    body.innerHTML = 
+       `<header><h1>BuzzQuizz</h1></header>
+        <main class="page1"></main>`
+    page1 = document.querySelector(".page1")
+
     const promiseQuizzes = axios.get("https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes");
     promiseQuizzes.then(renderizarQuizzes);
 }
 
 function renderizarQuizzes(response) {
     const quizzesServidor = response.data;
-    const page1 = document.querySelector(".page1");
-    page1.innerHTML = "";
 
     //.quiz--novo só deve aparecer se .quiz-usuario estiver vazio; consertar isso dps
-    renderizarQuizzesNovos(page1)
-    renderizarQuizzesUsuario(page1,quizzesServidor);
-    renderizarQuizzesTodos(page1,quizzesServidor);
+    renderizarQuizzesNovos()
+    renderizarQuizzesUsuario(quizzesServidor);
+    renderizarQuizzesTodos(quizzesServidor);
 }
 
-function renderizarQuizzesNovos(page1) {
+function renderizarQuizzesNovos() {
     page1.innerHTML += 
        `<div class="quiz quiz--novo">
             <p>Você não criou nenhum quizz ainda :(</p>
-            <div class="button" onclick="trocarTela1Tela3()">Criar Quizz</div>
+            <div class="button" onclick="carregarPagina3()">Criar Quizz</div>
         </div>`
 }
 
-function renderizarQuizzesUsuario(page1,quizzesServidor) {
+function renderizarQuizzesUsuario(quizzesServidor) {
     page1.innerHTML += 
        `<div class="quiz quiz--usuario">
-            <div class="cabecalho"><h2>Seus Quizzes</h2><ion-icon onclick="trocarTela1Tela3()" name="add-circle"></ion-icon></div>
+            <div class="cabecalho"><h2>Seus Quizzes</h2><ion-icon onclick="carregarPagina3()" name="add-circle"></ion-icon></div>
             <ul class="quiz__lista"></ul>
         </div>`
     for (var i = 0 ; i < quizzesServidor.length ; i++) {
@@ -38,7 +45,7 @@ function renderizarQuizzesUsuario(page1,quizzesServidor) {
     }
 }
 
-function renderizarQuizzesTodos(page1,quizzesServidor) {
+function renderizarQuizzesTodos(quizzesServidor) {
     page1.innerHTML += 
        `<div class="quiz quiz--todos">
             <h2>Todos os Quizzes</h2>

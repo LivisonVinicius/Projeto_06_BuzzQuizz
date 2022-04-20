@@ -92,7 +92,7 @@ input::placeholder {
     font-size: 26px;
     cursor: pointer;
 }
-.sub-bloco--nome {
+.bloco .sub-bloco:nth-of-type(1) {
     display: flex;
     justify-content: space-between;
     align-items: center;
