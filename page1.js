@@ -7,13 +7,29 @@ function carregarPagina() {
 
 function renderizarQuizzes(response) {
     const quizzesServidor = response.data;
-    
-    renderizarQuizzesUsuario(quizzesServidor);
-    renderizarQuizzesTodos(quizzesServidor);
+    const page1 = document.querySelector(".page1");
+    page1.innerHTML = "";
+
+    //.quiz--novo só deve aparecer se .quiz-usuario estiver vazio; consertar isso dps
+    renderizarQuizzesNovos(page1)
+    renderizarQuizzesUsuario(page1,quizzesServidor);
+    renderizarQuizzesTodos(page1,quizzesServidor);
 }
 
-function renderizarQuizzesUsuario(quizzesServidor) {
-    // if quizzesUsuario === 0, .quiz--novo desaparece e .quiz--usario aparece; dar return
+function renderizarQuizzesNovos(page1) {
+    page1.innerHTML += 
+       `<div class="quiz quiz--novo">
+            <p>Você não criou nenhum quizz ainda :(</p>
+            <div class="button" onclick="trocarTela1Tela3()">Criar Quizz</div>
+        </div>`
+}
+
+function renderizarQuizzesUsuario(page1,quizzesServidor) {
+    page1.innerHTML += 
+       `<div class="quiz quiz--usuario">
+            <div class="cabecalho"><h2>Seus Quizzes</h2><ion-icon onclick="trocarTela1Tela3()" name="add-circle"></ion-icon></div>
+            <ul class="quiz__lista"></ul>
+        </div>`
     for (var i = 0 ; i < quizzesServidor.length ; i++) {
         const image = quizzesServidor[i].image;
         const title = quizzesServidor[i].title;
@@ -22,7 +38,12 @@ function renderizarQuizzesUsuario(quizzesServidor) {
     }
 }
 
-function renderizarQuizzesTodos(quizzesServidor) {
+function renderizarQuizzesTodos(page1,quizzesServidor) {
+    page1.innerHTML += 
+       `<div class="quiz quiz--todos">
+            <h2>Todos os Quizzes</h2>
+            <ul class="quiz__lista"></ul>
+        </div>`
     for (var i = 0 ; i < quizzesServidor.length ; i++) {
         const image = quizzesServidor[i].image;
         const title = quizzesServidor[i].title;

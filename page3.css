@@ -90,6 +90,7 @@ input::placeholder {
 }
 .sub-bloco ion-icon {
     font-size: 26px;
+    cursor: pointer;
 }
 .sub-bloco--nome {
     display: flex;
