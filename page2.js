@@ -17,7 +17,7 @@ function geraQuiz(){
         mainPage2=document.querySelector("main");
         counter=0;
         counterRespostas=0;
-        let posicaoID=0
+        let posicaoID=7
         finalSelector=response.data[posicaoID].levels
         questionSelector=response.data[posicaoID].questions;
         document.querySelector(".page2").innerHTML+=`
@@ -52,8 +52,7 @@ function geraQuiz(){
         counter=0
     })
 }
-function selecionaResposta(selecionada,localPergunta){
-    
+function selecionaResposta(selecionada,localPergunta){  
     let contadorLoop=0
     let posicaoPergunta=Number(localPergunta.slice(8))
     if(document.querySelectorAll(`.${localPergunta} .esbraquicado`).length != 0){
@@ -81,10 +80,10 @@ function parametro(){
 }
 function scrollNext(local){
     if (local!== null){
-        local.scrollIntoView({behavior : "smooth", block : "end"})
+        local.scrollIntoView({behavior:"smooth", block : "end"})
     }else{
         let arr = []
-        let posicaoLvl=0
+        let posicaoLvl;
         let arrPosicao=[]
         pontuacao=Math.floor((pontuacao/document.querySelectorAll(".quizQuestion").length)*100)
         console.log(pontuacao)
@@ -94,19 +93,20 @@ function scrollNext(local){
                 arrPosicao.push(finalSelector[i])
             } 
         }
+        console.log(arrPosicao)
         novoArr=arr.sort(function(a, b){return a-b});
         console.log(novoArr)
         for(let i=0 ; i < arr.length ; i++){
             if(novoArr[-1]==arr[i]){
-                arrPosicao=arrPosicao[i]
+                posicaoLvl=arrPosicao[i]
             }
         }
         console.log(posicaoLvl)
         document.querySelector(".page2").innerHTML+=`
         <div class="finalDoJogo">
-            <h3>${arrPosicao.title}</h3>
-            <img src="${arrPosicao.image}" alt="Imagem Final">
-            <h4>${arrPosicao.text}</h4>
+            <h3>${posicaoLvl.title}</h3>
+            <img src="${posicaoLvl.image}" alt="Imagem Final">
+            <h4>${posicaoLvl.text}</h4>
         </div>
         `
         document.querySelector("finalDoJogo").scrollIntoView({behavior : "smooth", block : "end"})
