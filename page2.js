@@ -2,14 +2,14 @@ let counter;
 let counterRespostas;
 let salvaPromisse;
 let respostaSelector;
-let promise;
+let promisePage2;
 let questionSelector;
 let pontuacao=0;
 let finalSelector;
 let mainPage2;
 function geraQuiz(){
-    promise=axios.get('https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes')
-    promise.then(function(response){
+    promisePage2=axios.get('https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes')
+    promisePage2.then(function(response){
         body.innerHTML = `
         <header><h1>BuzzQuizz</h1></header>
         <main class="page2"></main>
@@ -19,7 +19,7 @@ function geraQuiz(){
         // pontuacao = 0; ou se nao recarregar a pagina fica estranho a pontuacao
         counter=0;
         counterRespostas=0;
-        let posicaoID=7
+        let posicaoID=0
         finalSelector=response.data[posicaoID].levels
         questionSelector=response.data[posicaoID].questions;
         document.querySelector(".page2").innerHTML+=`
