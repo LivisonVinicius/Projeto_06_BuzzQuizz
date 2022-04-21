@@ -39,10 +39,9 @@ li{
     align-items: center;
 }
 
-.quizQuestion{
+.quizQuestion {
     width: 100%;
     max-width: 759px;
-    height: auto;
     box-shadow: 0px 6px 38px rgba(0, 0, 0, 0.23);
     padding: 36px;
     display: flex;
@@ -50,14 +49,9 @@ li{
     justify-content: space-between;
     margin-top: 42px;
 }
-.quizQuestion > div{
-    margin-top: 20px;
-}
 .quizQuestion img{
-    display: block;
-    height: auto;
     width: 100%;
-    max-height: 175px;
+    height: 176px;
 }
 .quizQuestion h3{
     display: flex;
@@ -85,6 +79,8 @@ li{
     word-wrap:break-word;
 }
 .resposta{
+    margin-top: 20px;
+    height: 100%;
     width: 47.5%;
     cursor: pointer;
 }
@@ -164,6 +160,9 @@ li{
     .quizQuestion {
         margin-top: 24px;
     }
+    .quizQuestion img{
+        height: 114px;
+    }
     .quizQuestion h4 {
         font-size: 13px;
         line-height: 15px;
@@ -180,5 +179,7 @@ li{
     }
     .finalDoJogo h4 {
         margin-left: 0;
+        font-size: 17px;
+        line-height: 20px;
     }
 } 
