@@ -4,10 +4,14 @@ let salvaPromisse;
 let respostaSelector;
 let promisePage2;
 let questionSelector;
-let pontuacao=0;
+let pontuacao;
 let finalSelector;
 let mainPage2;
+
+let quizID;
+
 function geraQuiz(posicaoID){
+    quizID = posicaoID;
     promisePage2=axios.get('https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes')
     promisePage2.then(function(response){
         body.innerHTML = `
@@ -16,7 +20,7 @@ function geraQuiz(posicaoID){
         `
         mainPage2=document.querySelector("main");
 
-        // pontuacao = 0; ou se nao recarregar a pagina fica estranho a pontuacao
+        pontuacao = 0;
         counter=0;
         counterRespostas=0;
         finalSelector=response.data[posicaoID].levels
@@ -107,7 +111,13 @@ function scrollNext(local){
             <div><h3>${pontuacao}%: ${finalSelector[posicaoLvl].title}</h3></div>
             <div><img src="${finalSelector[posicaoLvl].image}" alt="Imagem Final"><h4>${finalSelector[posicaoLvl].text}</h4></div>
         </div>
+        <div class="button-container">
+            <div class="button button--reiniciar" onclick="geraQuiz(quizID)">Reiniciar Quiz</div>
+            <div class="button button--retornar" onclick="carregarPagina1()">Voltar para home</div>
+        </div>
         `
+
+        
 
         document.querySelector(".finalDoJogo").scrollIntoView({behavior : "smooth", block : "end"})
     }
