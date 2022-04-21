@@ -19,7 +19,7 @@ function geraQuiz(){
         // pontuacao = 0; ou se nao recarregar a pagina fica estranho a pontuacao
         counter=0;
         counterRespostas=0;
-        let posicaoID=0
+        let posicaoID=7
         finalSelector=response.data[posicaoID].levels
         questionSelector=response.data[posicaoID].questions;
         document.querySelector(".page2").innerHTML+=`
@@ -54,8 +54,7 @@ function geraQuiz(){
         counter=0
     })
 }
-function selecionaResposta(selecionada,localPergunta){
-    
+function selecionaResposta(selecionada,localPergunta){  
     let contadorLoop=0
     let posicaoPergunta=Number(localPergunta.slice(8))
 
@@ -89,7 +88,7 @@ function parametro(){
 }
 function scrollNext(local){
     if (local!== null){
-        local.scrollIntoView({behavior : "smooth", block : "end"})
+        local.scrollIntoView({behavior:"smooth", block : "end"})
     }else{
         let posicaoLvl=0
         pontuacao=Math.floor((pontuacao/document.querySelectorAll(".quizQuestion").length)*100)
