@@ -105,6 +105,7 @@ li{
 }
 .resposta{
     width: 47.5%;
+    cursor: pointer;
 }
 .esbraquicado{
     opacity: 0.3;
@@ -164,8 +165,7 @@ li{
     max-width: 364px;
     height: 273px;
 }
-
-@media screen and (max-width:1000px) {
+@media screen and (max-width:1100px) {
     .quizzTitle {
         height: 142px;
         font-size: 19px;

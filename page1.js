@@ -2,6 +2,7 @@
 const body = document.querySelector("body");
 let page1;
 let quizzesServidor;
+let conteudoStorage;
 
 carregarPagina1();
 
@@ -17,9 +18,9 @@ function carregarPagina1() {
 
 function renderizarQuizzes(response) {
     quizzesServidor = response.data;
-    let conteudoStorage = JSON.parse(localStorage.getItem("lista"));
+    conteudoStorage = JSON.parse(localStorage.getItem("lista"));
     //.quiz--novo só deve aparecer se .quiz-usuario estiver vazio; consertar isso dps
-    if(localStorage.length==0 || conteudoStorage.length==0){
+    if(conteudoStorage==null || conteudoStorage.length==0){
         renderizarQuizzesNovos()
     }else{
         renderizarQuizzesUsuario();
