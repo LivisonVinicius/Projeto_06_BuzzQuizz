@@ -211,6 +211,7 @@ function renderizarEtapaIII() {
             <h2>Agora, decida os níveis!</h2>
         </div>`
     const etapa = document.querySelector(".etapa--niveis");
+    // NAO ESQUECER DE TROCAR O INPUT DA DESCRICAO PARA O OUTRA CAIXA DE TEXTO GIGANTE********************************************************************************************************
     for (var i = 0 ; i < numeroNiveis ; i ++) {
         etapa.innerHTML += 
        `<div class="bloco">

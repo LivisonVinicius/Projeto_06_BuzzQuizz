@@ -19,7 +19,7 @@ function geraQuiz(){
         // pontuacao = 0; ou se nao recarregar a pagina fica estranho a pontuacao
         counter=0;
         counterRespostas=0;
-        let posicaoID=0
+        let posicaoID=4;
         finalSelector=response.data[posicaoID].levels
         questionSelector=response.data[posicaoID].questions;
         document.querySelector(".page2").innerHTML+=`
@@ -106,9 +106,8 @@ function scrollNext(local){
          
         document.querySelector(".page2").innerHTML+=`
         <div class="finalDoJogo">
-            <h3>${pontuacao}%: ${finalSelector[posicaoLvl].title}</h3>
-            <img src="${finalSelector[posicaoLvl].image}" alt="Imagem Final">
-            <h4>${finalSelector[posicaoLvl].text}</h4>
+            <div><h3>${pontuacao}%: ${finalSelector[posicaoLvl].title}</h3></div>
+            <div><img src="${finalSelector[posicaoLvl].image}" alt="Imagem Final"><h4>${finalSelector[posicaoLvl].text}</h4></div>
         </div>
         `
 
