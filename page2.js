@@ -7,7 +7,7 @@ let questionSelector;
 let pontuacao=0;
 let finalSelector;
 let mainPage2;
-function geraQuiz(){
+function geraQuiz(posicaoID){
     promisePage2=axios.get('https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes')
     promisePage2.then(function(response){
         body.innerHTML = `
@@ -19,7 +19,6 @@ function geraQuiz(){
         // pontuacao = 0; ou se nao recarregar a pagina fica estranho a pontuacao
         counter=0;
         counterRespostas=0;
-        let posicaoID=0
         finalSelector=response.data[posicaoID].levels
         questionSelector=response.data[posicaoID].questions;
         document.querySelector(".page2").innerHTML+=`
@@ -51,7 +50,6 @@ function geraQuiz(){
             }
             counter++
         }
-        counter=0
     })
 }
 function selecionaResposta(selecionada,localPergunta){  

@@ -1,6 +1,7 @@
 // ideia para depois, em vez de deixar a classe escondido nas paginas zerar o body e gerar o main .page do 0
 const body = document.querySelector("body");
 let page1;
+let quizzesServidor;
 
 carregarPagina1();
 
@@ -15,12 +16,15 @@ function carregarPagina1() {
 }
 
 function renderizarQuizzes(response) {
-    const quizzesServidor = response.data;
-
+    quizzesServidor = response.data;
+    let conteudoStorage = JSON.parse(localStorage.getItem("lista"));
     //.quiz--novo só deve aparecer se .quiz-usuario estiver vazio; consertar isso dps
-    renderizarQuizzesNovos()
-    renderizarQuizzesUsuario(quizzesServidor);
-    renderizarQuizzesTodos(quizzesServidor);
+    if(localStorage.length==0 || conteudoStorage.length==0){
+        renderizarQuizzesNovos()
+    }else{
+        renderizarQuizzesUsuario();
+    } 
+    renderizarQuizzesTodos();
 }
 
 function renderizarQuizzesNovos() {
@@ -31,21 +35,28 @@ function renderizarQuizzesNovos() {
         </div>`
 }
 
-function renderizarQuizzesUsuario(quizzesServidor) {
+function renderizarQuizzesUsuario() {
     page1.innerHTML += 
        `<div class="quiz quiz--usuario">
             <div class="cabecalho"><h2>Seus Quizzes</h2><ion-icon onclick="carregarPagina3()" name="add-circle"></ion-icon></div>
             <ul class="quiz__lista"></ul>
         </div>`
-    for (var i = 0 ; i < quizzesServidor.length ; i++) {
-        const image = quizzesServidor[i].image;
-        const title = quizzesServidor[i].title;
-        const lista = document.querySelector(".quiz--usuario .quiz__lista");
-        lista.innerHTML += `<li class="quizz"><img src=${image} alt=""><div class="gradiente"></div><h3>${title}</h3></li>`
+    let listaDeIDs=JSON.parse(localStorage.getItem("lista"))
+    console.log(typeof listaDeIDs[0])
+    for (let j = 0 ; j < listaDeIDs.length ; j++){
+        for (let i = 0 ; i < quizzesServidor.length ; i++) {
+            if(Number(quizzesServidor[i].id)==listaDeIDs[j]){
+                const image = quizzesServidor[i].image;
+                const title = quizzesServidor[i].title;
+                const lista = document.querySelector(".quiz--usuario .quiz__lista");
+                lista.innerHTML += `<li class="quizz" onclick="geraQuiz(${i})"><img src=${image} alt=""><div class="gradiente"></div><h3>${title}</h3></li>`
+            }
+        }
     }
+    
 }
 
-function renderizarQuizzesTodos(quizzesServidor) {
+function renderizarQuizzesTodos() {
     page1.innerHTML += 
        `<div class="quiz quiz--todos">
             <h2>Todos os Quizzes</h2>
@@ -55,7 +66,7 @@ function renderizarQuizzesTodos(quizzesServidor) {
         const image = quizzesServidor[i].image;
         const title = quizzesServidor[i].title;
         const lista = document.querySelector(".quiz--todos .quiz__lista");
-        lista.innerHTML += `<li class="quizz"><img src=${image} alt=""><div class="gradiente"></div><h3>${title}</h3></li>`
+        lista.innerHTML += `<li class="quizz" onclick="geraQuiz(${i})"><img src=${image} alt=""><div class="gradiente"></div><h3>${title}</h3></li>`
     }
 }
 
