@@ -1,6 +1,6 @@
-let titulo, imgURL, numeroPerguntas, numeroNiveis;
-let perguntasTextos, perguntasCores, perguntasRespostas;
+let numeroPerguntas, numeroNiveis;
 let page3;
+let quiz;
 
 function carregarPagina3() {
     body.innerHTML = 
@@ -8,24 +8,7 @@ function carregarPagina3() {
         <main class="page3"></main>`
     page3 = document.querySelector(".page3");
 
-    resetarVariaveisEtapaI();
-    resetarVariaveisEtapaII();
-
     renderizarEtapaI();
-}
-
-function resetarVariaveisEtapaI() {
-    titulo = "";
-    imgURL = "";
-    numeroPerguntas = 0;
-    numeroNiveis = 0;
-}
-
-function resetarVariaveisEtapaII() {
-    perguntasTextos = [];
-    perguntasCores = []; 
-    perguntasRespostasTexto = [];
-    perguntasRespostasImagem = [];
 }
 
 //ETAPA I //
@@ -51,15 +34,23 @@ function trocarEtapaI() {
     }
 }
 function validarEtapaI() {
-    resetarVariaveisEtapaI();
-    titulo = document.querySelector(".etapa--inicial .titulo").value;
+    quiz = {
+        title: "",
+	    image: "",
+	    questions: [],
+        levels: []
+    }
+
+    quiz.title = document.querySelector(".etapa--inicial .titulo").value;
+    quiz.image = document.querySelector(".etapa--inicial .img-url").value;
     numeroPerguntas = Number(document.querySelector(".etapa--inicial .numero-perguntas").value);
     numeroNiveis = Number(document.querySelector(".etapa--inicial .numero-niveis").value);
 
-    if (titulo.length < 20 || titulo.length > 65) {
+    if (quiz.title.length < 20 || quiz.title.length > 65) {
         return false;
     } 
     // talvez criar uma função só para validar URL de imagem
+    let imgURL;
     try {
         imgURL = new URL(document.querySelector(".etapa--inicial .img-url").value);
     } catch (_) {
@@ -77,9 +68,6 @@ function validarEtapaI() {
     return true;
 }
 
-function validarURLImagem() {
-    
-}
 
 
 //ETAPA II //
@@ -144,59 +132,73 @@ function trocarEtapaII() {
     }
 }
 function validarEtapaII() {
-    resetarVariaveisEtapaII();
+    quiz.questions = []
     const perguntas = document.querySelectorAll(".bloco .sub-bloco:nth-of-type(2)");
     for (var i = 0 ; i < perguntas.length ; i ++) {
-        const perguntaTexto = perguntas[i].querySelector(".forms--nome input:nth-of-type(1)").value;
-        if (perguntaTexto.length < 20) {
+        const question = {
+            title: "",
+			color: "",
+			answers: []
+        }
+        question.title = perguntas[i].querySelector(".forms--nome input:nth-of-type(1)").value;
+        if (question.title.length < 20) {
             return false;
         }
-        perguntasTextos.push(perguntaTexto);
         
         // descobrir como impedir que o usuário escolha uma cor parecida com a cor do texto da pergunta (branco)
-        const perguntaCor = perguntas[i].querySelector(".forms--nome input:nth-of-type(2)").value;
-        perguntasCores.push(perguntaCor);
+        question.color = perguntas[i].querySelector(".forms--nome input:nth-of-type(2)").value;
 
+        let answer = {
+            text: "",
+			image: "",
+			isCorrectAnswer: true
+        }
         const respostaCorreta = perguntas[i].querySelector(".forms--respostas-corretas .forms__resposta");
-        const respostaCorretaTexto = respostaCorreta.querySelector("input:nth-of-type(1)").value;
-        let respostaCorretaImagem = respostaCorreta.querySelector("input:nth-of-type(2)").value;
-        if (respostaCorretaTexto === "" || respostaCorretaImagem === "") {
+        answer.text = respostaCorreta.querySelector("input:nth-of-type(1)").value;
+        answer.image = respostaCorreta.querySelector("input:nth-of-type(2)").value;
+        if (answer.text === "" || answer.image === "") {
             return false;
         }
+
+        let imgURL;
         try {
-            respostaCorretaImagem = new URL(respostaCorretaImagem);
+            imgURL = new URL(respostaCorreta.querySelector("input:nth-of-type(2)").value);
         } catch (_) {
             return false;  
         }
-        if (!(/\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(respostaCorretaImagem))) {
+        if (!(/\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(imgURL))) {
             return false;
         }
-        perguntasRespostasTexto.push(respostaCorretaTexto);
-        perguntasRespostasImagem.push(respostaCorretaImagem);
+        question.answers.push(answer);
         
         const respostasIncorretas = perguntas[i].querySelectorAll(".forms--respostas-incorretas .forms__resposta");
-        let respostaIncorretaTexto, respostaIncorretaImagem;
         for (var x = 0 ; x < respostasIncorretas.length ; x ++) {
-            respostaIncorretaTexto = respostasIncorretas[x].querySelector("input:nth-of-type(1)").value;
-            respostaIncorretaImagem = respostasIncorretas[x].querySelector("input:nth-of-type(2)").value;
-            if (respostaIncorretaTexto === "" || respostaIncorretaImagem === "") {
+            answer = {
+                text: "",
+                image: "",
+                isCorrectAnswer: false
+            }
+            answer.text = respostasIncorretas[x].querySelector("input:nth-of-type(1)").value;
+            answer.image = respostasIncorretas[x].querySelector("input:nth-of-type(2)").value;
+            if (answer.text === "" || answer.image === "") {
                 continue;
             } else {
+                let imgURL;
                 try {
-                    respostaIncorretaImagem = new URL(respostaIncorretaImagem);
+                    imgURL = new URL(respostasIncorretas[x].querySelector("input:nth-of-type(2)").value);
                 } catch (_) {
                     return false;  
                 }
-                if (!(/\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(respostaIncorretaImagem))) {
+                if (!(/\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(imgURL))) {
                     return false;
                 }
-                perguntasRespostasTexto.push(respostaCorretaTexto);
-                perguntasRespostasImagem.push(respostaCorretaImagem);
+                question.answers.push(answer);
             }
         }
-        if (perguntasRespostasTexto.length === 1 || perguntasRespostasImagem.length === 1) {
+        if (question.answers.length === 1) {
             return false;
         }
+        quiz.questions.push(question);
     }
     return true;
 }
@@ -238,12 +240,56 @@ function selecionarNivel(nivelClicado) {
 function trocarEtapaIII() {
     if (validarEtapaIII()) {
         renderizarEtapaIV();
+        enviarQuiz();
     } else {
         alert("Pelo menos um dos dados inseridos não são válidos!");
     }
 }
 
 function validarEtapaIII() {
+    quiz.levels = [];
+    const niveis = document.querySelectorAll(".bloco .sub-bloco:nth-of-type(2)");
+    let Acerto0Porcento = false;
+    for (var i = 0 ; i < niveis.length ; i ++) {
+        const level = {
+            title: "",
+            image: "",
+            text: "",
+            minValue: 0
+        }
+        level.title = niveis[i].querySelector(".forms--nome input:nth-of-type(1)").value;
+        if (level.title.length < 10) {
+            return false;
+        }
+
+        level.minValue = Number(niveis[i].querySelector(".forms--nome input:nth-of-type(2)").value);
+        if (level.minValue < 0 || level.minValue > 100) {
+            return false;
+        }
+        if (level.minValue === 0) {
+            Acerto0Porcento = true;
+        }
+
+        level.image = niveis[i].querySelector(".forms--nome input:nth-of-type(3)").value;
+        let imgURL;
+        try {
+            imgURL = new URL(niveis[i].querySelector(".forms--nome input:nth-of-type(3)").value);
+        } catch (_) {
+            return false;  
+        }
+        if (!(/\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(imgURL))) {
+            return false;
+        }
+
+        level.text = niveis[i].querySelector(".forms--nome input:nth-of-type(4)").value;
+        if (level.text .length < 30) {
+            return false;
+        }
+        quiz.levels.push(level);
+    } 
+    if (Acerto0Porcento === false) {
+        return false;
+    }
     return true;
 }
 
@@ -253,8 +299,13 @@ function renderizarEtapaIV() {
     page3.innerHTML += 
        `<div class="etapa etapa--final">
             <h2>Seu quizz está pronto!</h2>
-            <div class="quizz"><img src="lofi.jpg" alt=""><div class="gradiente"></div><h3>Título do Quiz</h3></div>
-            <div class="button button--avancar" onclick="trocarTela2Tela3()">Acessar Quizz</div>
+            <div class="quizz"><img src="${quiz.image}" alt=""><div class="gradiente"></div><h3>${quiz.title}</h3></div>
+            <div class="button button--avancar" onclick="gerarQuiz()">Acessar Quizz</div>
             <div class="button button--retornar" onclick="carregarPagina1()">Voltar para home</div>
         </div>`
+}
+
+function enviarQuiz() {
+    // axios post
+    console.log(quiz)
 }
