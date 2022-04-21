@@ -109,7 +109,8 @@ function scrollNext(local){
         </div>
         `
 
-        // coloquei um ponto antes de finalDoJogo
         document.querySelector(".finalDoJogo").scrollIntoView({behavior : "smooth", block : "end"})
     }
 }
+
+// BUG NO SCROLL DO QUIZ, QUANDO RESPONDE A ULTIMA QUESTAO PRIMEIRO O SCROLL, APARECE O RESULTADO
