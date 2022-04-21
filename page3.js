@@ -312,6 +312,7 @@ function enviarQuiz() {
     const promise = axios.get("https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes")
     promise.then(function(response){
         IDdoQuiz = response.data[0].id
+        localStorage.setItem(`${IDdoQuiz}`,`${IDdoQuiz}`)
     })
-    localStorage.setItem(`${IDdoQuiz}`,quizCriado)
+    
 }
