@@ -300,12 +300,19 @@ function renderizarEtapaIV() {
        `<div class="etapa etapa--final">
             <h2>Seu quizz está pronto!</h2>
             <div class="quizz"><img src="${quiz.image}" alt=""><div class="gradiente"></div><h3>${quiz.title}</h3></div>
-            <div class="button button--avancar" onclick="gerarQuiz()">Acessar Quizz</div>
+            <div class="button button--avancar" onclick="geraQuiz()">Acessar Quizz</div>
             <div class="button button--retornar" onclick="carregarPagina1()">Voltar para home</div>
         </div>`
 }
 
 function enviarQuiz() {
-    // axios post
-    console.log(quiz)
+    const posting = axios.post("https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes",quiz)
+    let IDdoQuiz;
+    const quizCriado = JSON.stringify(quiz);
+    const promise = axios.get("https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes")
+    promise.then(function(response){
+        IDdoQuiz = response.data[0].id
+        localStorage.setItem(`${IDdoQuiz}`,`${IDdoQuiz}`)
+    })
+    
 }
