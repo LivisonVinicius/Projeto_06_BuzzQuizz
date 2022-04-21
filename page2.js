@@ -19,7 +19,7 @@ function geraQuiz(){
         // pontuacao = 0; ou se nao recarregar a pagina fica estranho a pontuacao
         counter=0;
         counterRespostas=0;
-        let posicaoID=7
+        let posicaoID=0
         finalSelector=response.data[posicaoID].levels
         questionSelector=response.data[posicaoID].questions;
         document.querySelector(".page2").innerHTML+=`
@@ -98,7 +98,7 @@ function scrollNext(local){
             if(minValue >= finalSelector[i].minValue){
                 posicaoLvl = i;
                 minValue = finalSelector[i].minValue
-            } else if (finalSelector[i].minValue > minValue || finalSelector[i].minValue <= pontuacao){
+            } else if (finalSelector[i].minValue > minValue && finalSelector[i].minValue <= pontuacao){
                 posicaoLvl = i;
                 minValue = finalSelector[i].minValue
             }
@@ -106,7 +106,7 @@ function scrollNext(local){
          
         document.querySelector(".page2").innerHTML+=`
         <div class="finalDoJogo">
-            <h3>${finalSelector[posicaoLvl].title}</h3>
+            <h3>${pontuacao}%: ${finalSelector[posicaoLvl].title}</h3>
             <img src="${finalSelector[posicaoLvl].image}" alt="Imagem Final">
             <h4>${finalSelector[posicaoLvl].text}</h4>
         </div>
