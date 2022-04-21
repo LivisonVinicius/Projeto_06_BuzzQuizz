@@ -91,40 +91,20 @@ function scrollNext(local){
     if (local!== null){
         local.scrollIntoView({behavior : "smooth", block : "end"})
     }else{
-        let arr = []
         let posicaoLvl=0
-        let arrPosicao=[]
         pontuacao=Math.floor((pontuacao/document.querySelectorAll(".quizQuestion").length)*100)
-        console.log(pontuacao)
 
-        //finalSelector é a lista com níveis
+        let minValue = 100;
         for(let i=0 ; i<finalSelector.length;i++){
-            if(pontuacao>=finalSelector[i].minValue){
-                arr.push(finalSelector[i].minValue)
-                // arrPosicao.push(finalSelector[i])
-                arrPosicao.push(i)
-                // problema: nao ta entrando quando pontuacoa eh 0
-            } 
-        }
-
-        novoArr=arr.sort(function(a, b){return a-b});
-
-        let arrTeste = [];
-        console.log("teste" + typeof(arrTeste))
-        for (var x = 0; x < arr.length ; x ++) {
-            arrTeste.push(novoArr[x]);
-        }
-
-        for(let i=0 ; i < arr.length ; i++){
-            console.log("novoArr[-1] = " + novoArr[-1])
-            console.log("arr[i]] = " + arr[i])
-            if(novoArr[-1]==arr[i]){
-                posicaoLvl=arrPosicao[i];
+            if(minValue >= finalSelector[i].minValue){
+                posicaoLvl = i;
+                minValue = finalSelector[i].minValue
+            } else if (finalSelector[i].minValue > minValue || finalSelector[i].minValue <= pontuacao){
+                posicaoLvl = i;
+                minValue = finalSelector[i].minValue
             }
         }
-
-        
-        console.log(posicaoLvl)  
+         
         document.querySelector(".page2").innerHTML+=`
         <div class="finalDoJogo">
             <h3>${finalSelector[posicaoLvl].title}</h3>
