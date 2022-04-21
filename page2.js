@@ -15,6 +15,8 @@ function geraQuiz(){
         <main class="page2"></main>
         `
         mainPage2=document.querySelector("main");
+
+        // pontuacao = 0; ou se nao recarregar a pagina fica estranho a pontuacao
         counter=0;
         counterRespostas=0;
         let posicaoID=0
@@ -56,9 +58,15 @@ function selecionaResposta(selecionada,localPergunta){
     
     let contadorLoop=0
     let posicaoPergunta=Number(localPergunta.slice(8))
+
+    // impedir que o usuario possa clicar em outra resposta
     if(document.querySelectorAll(`.${localPergunta} .esbraquicado`).length != 0){
         return
     }
+
+    // .localPergunta é a classe do elemento pai, e o parametro enviado pelo elemento filho para essa funcao
+    // embaixo ta chamando todos os filhos do elemento pai
+
     while(contadorLoop < document.querySelectorAll(`.${localPergunta} > *`).length-1){
         document.querySelector(`.${localPergunta} .resposta${contadorLoop}`).classList.add("esbraquicado")
         switch(questionSelector[posicaoPergunta].answers[contadorLoop].isCorrectAnswer){
@@ -88,27 +96,44 @@ function scrollNext(local){
         let arrPosicao=[]
         pontuacao=Math.floor((pontuacao/document.querySelectorAll(".quizQuestion").length)*100)
         console.log(pontuacao)
+
+        //finalSelector é a lista com níveis
         for(let i=0 ; i<finalSelector.length;i++){
             if(pontuacao>=finalSelector[i].minValue){
                 arr.push(finalSelector[i].minValue)
-                arrPosicao.push(finalSelector[i])
+                // arrPosicao.push(finalSelector[i])
+                arrPosicao.push(i)
+                // problema: nao ta entrando quando pontuacoa eh 0
             } 
         }
+
         novoArr=arr.sort(function(a, b){return a-b});
-        console.log(novoArr)
+
+        let arrTeste = [];
+        console.log("teste" + typeof(arrTeste))
+        for (var x = 0; x < arr.length ; x ++) {
+            arrTeste.push(novoArr[x]);
+        }
+
         for(let i=0 ; i < arr.length ; i++){
+            console.log("novoArr[-1] = " + novoArr[-1])
+            console.log("arr[i]] = " + arr[i])
             if(novoArr[-1]==arr[i]){
-                arrPosicao=arrPosicao[i]
+                posicaoLvl=arrPosicao[i];
             }
         }
-        console.log(posicaoLvl)
+
+        
+        console.log(posicaoLvl)  
         document.querySelector(".page2").innerHTML+=`
         <div class="finalDoJogo">
-            <h3>${arrPosicao.title}</h3>
-            <img src="${arrPosicao.image}" alt="Imagem Final">
-            <h4>${arrPosicao.text}</h4>
+            <h3>${finalSelector[posicaoLvl].title}</h3>
+            <img src="${finalSelector[posicaoLvl].image}" alt="Imagem Final">
+            <h4>${finalSelector[posicaoLvl].text}</h4>
         </div>
         `
-        document.querySelector("finalDoJogo").scrollIntoView({behavior : "smooth", block : "end"})
+
+        // coloquei um ponto antes de finalDoJogo
+        document.querySelector(".finalDoJogo").scrollIntoView({behavior : "smooth", block : "end"})
     }
 }
