@@ -7,19 +7,20 @@ let conteudoStorage;
 carregarPagina1();
 
 function carregarPagina1() {
+    const promiseQuizzes = axios.get("https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes");
+    promiseQuizzes.then(renderizarQuizzes);
+    renderizarTelaDeCarregamento()
+}
+
+function renderizarQuizzes(response) {
     body.innerHTML = 
        `<header><h1>BuzzQuizz</h1></header>
         <main class="page1"></main>`
     page1 = document.querySelector(".page1")
 
-    const promiseQuizzes = axios.get("https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes");
-    promiseQuizzes.then(renderizarQuizzes);
-}
-
-function renderizarQuizzes(response) {
     quizzesServidor = response.data;
     conteudoStorage = JSON.parse(localStorage.getItem("lista"));
-    //.quiz--novo só deve aparecer se .quiz-usuario estiver vazio; consertar isso dps
+    
     if(conteudoStorage==null || conteudoStorage.length==0){
         renderizarQuizzesNovos()
     }else{
@@ -43,14 +44,21 @@ function renderizarQuizzesUsuario() {
             <ul class="quiz__lista"></ul>
         </div>`
     let listaDeIDs=JSON.parse(localStorage.getItem("lista"))
-    console.log(typeof listaDeIDs[0])
     for (let j = 0 ; j < listaDeIDs.length ; j++){
         for (let i = 0 ; i < quizzesServidor.length ; i++) {
             if(Number(quizzesServidor[i].id)==listaDeIDs[j]){
                 const image = quizzesServidor[i].image;
                 const title = quizzesServidor[i].title;
                 const lista = document.querySelector(".quiz--usuario .quiz__lista");
-                lista.innerHTML += `<li class="quizz" onclick="geraQuiz(${i})"><img src=${image} alt=""><div class="gradiente"></div><h3>${title}</h3></li>`
+
+                // COLOCAR FUNCAO PARA DELETAR E EDICAO NOS ION ICONS
+                lista.innerHTML += `
+                    <li class="quizz">
+                        <img src=${image} alt="">
+                        <div class="quizz-configuracao"><ion-icon class="edit" name="create-outline"></ion-icon><ion-icon class="trash" name="trash-outline"></ion-icon></div>
+                        <div class="gradiente" onclick="geraQuiz(${i})"></div>
+                        <h3>${title}</h3>
+                    </li>`
             }
         }
     }
@@ -67,7 +75,22 @@ function renderizarQuizzesTodos() {
         const image = quizzesServidor[i].image;
         const title = quizzesServidor[i].title;
         const lista = document.querySelector(".quiz--todos .quiz__lista");
-        lista.innerHTML += `<li class="quizz" onclick="geraQuiz(${i})"><img src=${image} alt=""><div class="gradiente"></div><h3>${title}</h3></li>`
+
+        lista.innerHTML += `
+        <li class="quizz">
+            <img src=${image} alt="">
+            <div class="gradiente" onclick="geraQuiz(${i})"></div>
+            <h3>${title}</h3>
+        </li>`
     }
 }
 
+function renderizarTelaDeCarregamento() {
+    body.innerHTML = `
+        <header><h1>BuzzQuizz</h1></header>
+        <div class="overlay">
+            <img src="spinner.gif" alt="gif de spinner">
+            <p class="overlay__texto">Carregando</p> 
+        </div>
+    `
+}

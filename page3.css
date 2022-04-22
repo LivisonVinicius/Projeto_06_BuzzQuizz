@@ -135,7 +135,7 @@ input::placeholder {
     display: initial;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1100px) {
     .page3 {
         margin-top: 116px;
     }
