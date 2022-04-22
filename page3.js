@@ -331,7 +331,7 @@ function guardarID() {
         let conteudoStorage = JSON.parse(localStorage.getItem("ID"));
         conteudoStorage.push(IDdoQuiz);
         conteudoStorage=JSON.stringify(conteudoStorage);
-        localStorage.setItem(`ID`,conteudoStorage)
+        localStorage.setItem(`ID`,conteudoStorage);
     })
 }
 
