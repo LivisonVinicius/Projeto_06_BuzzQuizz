@@ -19,7 +19,7 @@ function renderizarQuizzes(response) {
     page1 = document.querySelector(".page1")
 
     quizzesServidor = response.data;
-    conteudoStorage = JSON.parse(localStorage.getItem("lista"));
+    conteudoStorage = JSON.parse(localStorage.getItem("ID"));
     
     if(conteudoStorage==null || conteudoStorage.length==0){
         renderizarQuizzesNovos()
@@ -43,7 +43,7 @@ function renderizarQuizzesUsuario() {
             <div class="cabecalho"><h2>Seus Quizzes</h2><ion-icon onclick="carregarPagina3()" name="add-circle"></ion-icon></div>
             <ul class="quiz__lista"></ul>
         </div>`
-    let listaDeIDs=JSON.parse(localStorage.getItem("lista"))
+    let listaDeIDs=JSON.parse(localStorage.getItem("ID"))
     for (let j = 0 ; j < listaDeIDs.length ; j++){
         for (let i = 0 ; i < quizzesServidor.length ; i++) {
             if(Number(quizzesServidor[i].id)==listaDeIDs[j]){

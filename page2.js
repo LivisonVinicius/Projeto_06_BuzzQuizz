@@ -114,7 +114,6 @@ function scrollNext(local){
             <div class="button button--retornar" onclick="carregarPagina1()">Voltar para home</div>
         </div>
         `
-        
         document.querySelector(".finalDoJogo").scrollIntoView({behavior : "smooth", block : "end"})
     }
 }
