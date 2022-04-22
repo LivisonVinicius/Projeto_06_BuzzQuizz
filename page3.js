@@ -313,9 +313,6 @@ function enviarQuiz() {
 
 function guardarID() {
     let IDdoQuiz;
-
-    // a variavel quizCriado ainda precisa?
-    const quizCriado = JSON.stringify(quiz);
     const promise = axios.get("https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes")
     promise.then(function(response){
         IDdoQuiz = response.data[0].id
@@ -327,7 +324,7 @@ function guardarID() {
         conteudoStorage=JSON.stringify(conteudoStorage);
         localStorage.removeItem("lista");
         localStorage.setItem(`lista`,conteudoStorage)
-    }) 
+    })
 }
 
 // ENTRANDO NO GET THEN ANTES DE POSTAR
