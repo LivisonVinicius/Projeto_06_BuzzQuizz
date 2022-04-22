@@ -301,7 +301,7 @@ function renderizarEtapaIV() {
        `<div class="etapa etapa--final">
             <h2>Seu quizz está pronto!</h2>
             <div class="quizz"><img src="${quiz.image}" alt=""><div class="gradiente"></div><h3>${quiz.title}</h3></div>
-            <div class="button button--avancar" onclick="geraQuiz()">Acessar Quizz</div>
+            <div class="button button--avancar" onclick="geraQuiz(${JSON.parse(localStorage.getItem("lista"))[-1]})">Acessar Quizz</div>
             <div class="button button--retornar" onclick="carregarPagina1()">Voltar para home</div>
         </div>`
 }
