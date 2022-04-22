@@ -60,13 +60,9 @@ function selecionaResposta(selecionada,localPergunta){
     let contadorLoop=0
     let posicaoPergunta=Number(localPergunta.slice(8))
 
-    // impedir que o usuario possa clicar em outra resposta
     if(document.querySelectorAll(`.${localPergunta} .esbraquicado`).length != 0){
         return
     }
-
-    // .localPergunta é a classe do elemento pai, e o parametro enviado pelo elemento filho para essa funcao
-    // embaixo ta chamando todos os filhos do elemento pai
 
     while(contadorLoop < document.querySelectorAll(`.${localPergunta} > *`).length-1){
         document.querySelector(`.${localPergunta} .resposta${contadorLoop}`).classList.add("esbraquicado")
