@@ -296,10 +296,12 @@ function validarEtapaIII() {
 
 //ETAPA IV //
 function enviarQuiz() {
-    renderizarEtapaIV();
 
     const posting = axios.post("https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes",quiz)
-    posting.then (guardarID);
+    posting.then (function (){
+        guardarID();
+        renderizarEtapaIV();
+    });
 }
 
 function renderizarEtapaIV() {
@@ -319,17 +321,17 @@ function renderizarEtapaIV() {
 
 function guardarID() {
     let IDdoQuiz;
+
     const promise = axios.get("https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes")
     promise.then(function(response){
         IDdoQuiz = response.data[0].id
-        if(localStorage.length==0 || localStorage.getItem){
-            localStorage.setItem("lista",`[]`)
+        if(localStorage.length==0 || localStorage.getItem("ID")==null){
+            localStorage.setItem("ID",`[]`)
         }
-        let conteudoStorage = JSON.parse(localStorage.getItem("lista"));
+        let conteudoStorage = JSON.parse(localStorage.getItem("ID"));
         conteudoStorage.push(IDdoQuiz);
         conteudoStorage=JSON.stringify(conteudoStorage);
-        localStorage.removeItem("lista");
-        localStorage.setItem(`lista`,conteudoStorage)
+        localStorage.setItem(`ID`,conteudoStorage)
     })
 }
 
