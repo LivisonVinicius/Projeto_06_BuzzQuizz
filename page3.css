@@ -39,7 +39,7 @@ input::placeholder {
     line-height: 23px;
     color: #000000;
 }
-.etapa .button {
+.button {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -48,6 +48,7 @@ input::placeholder {
     height: 54px;
     width: 100%;
     max-width: 368px;
+    text-align: center;
     font-weight: 400;
     font-size: 18px;
     line-height: 21px;

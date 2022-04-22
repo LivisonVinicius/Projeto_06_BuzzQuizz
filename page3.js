@@ -301,14 +301,20 @@ function renderizarEtapaIV() {
        `<div class="etapa etapa--final">
             <h2>Seu quizz está pronto!</h2>
             <div class="quizz"><img src="${quiz.image}" alt=""><div class="gradiente"></div><h3>${quiz.title}</h3></div>
-            <div class="button button--avancar" onclick="geraQuiz(${JSON.parse(localStorage.getItem("lista"))[-1]})">Acessar Quizz</div>
+            <div class="button button--avancar" onclick="geraQuiz(${quizID})">Acessar Quizz</div>
             <div class="button button--retornar" onclick="carregarPagina1()">Voltar para home</div>
         </div>`
 }
 
 function enviarQuiz() {
     const posting = axios.post("https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes",quiz)
+    posting.then (guardarID);
+}
+
+function guardarID() {
     let IDdoQuiz;
+
+    // a variavel quizCriado ainda precisa?
     const quizCriado = JSON.stringify(quiz);
     const promise = axios.get("https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes")
     promise.then(function(response){
@@ -319,6 +325,9 @@ function enviarQuiz() {
         let conteudoStorage = JSON.parse(localStorage.getItem("lista"));
         conteudoStorage.push(IDdoQuiz);
         conteudoStorage=JSON.stringify(conteudoStorage);
+        localStorage.removeItem("lista");
         localStorage.setItem(`lista`,conteudoStorage)
     }) 
 }
+
+// ENTRANDO NO GET THEN ANTES DE POSTAR
