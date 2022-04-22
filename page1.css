@@ -201,3 +201,9 @@ header{
         justify-content: center;
     }
 }
+
+@media (max-width: 745px) {
+    .quizz {
+        margin: 12px 0 0;
+    }
+}
