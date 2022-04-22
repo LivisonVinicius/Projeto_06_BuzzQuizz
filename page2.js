@@ -55,7 +55,9 @@ function geraQuiz(posicaoID){
             counter++
         }
     })
+    renderizarTelaDeCarregamento();
 }
+
 function selecionaResposta(selecionada,localPergunta){  
     let contadorLoop=0
     let posicaoPergunta=Number(localPergunta.slice(8))

@@ -240,8 +240,8 @@ function selecionarNivel(nivelClicado) {
 }
 function trocarEtapaIII() {
     if (validarEtapaIII()) {
-        renderizarEtapaIV();
         enviarQuiz();
+        renderizarTelaDeCarregamento();
     } else {
         alert("Pelo menos um dos dados inseridos não são válidos!");
     }
@@ -295,8 +295,19 @@ function validarEtapaIII() {
 }
 
 //ETAPA IV //
+function enviarQuiz() {
+    renderizarEtapaIV();
+
+    const posting = axios.post("https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes",quiz)
+    posting.then (guardarID);
+}
+
 function renderizarEtapaIV() {
-    page3.innerHTML = ""
+    body.innerHTML = 
+       `<header><h1>BuzzQuizz</h1></header>
+        <main class="page3"></main>`
+    page3 = document.querySelector(".page3");
+
     page3.innerHTML += 
        `<div class="etapa etapa--final">
             <h2>Seu quizz está pronto!</h2>
@@ -304,11 +315,6 @@ function renderizarEtapaIV() {
             <div class="button button--avancar" onclick="geraQuiz(${quizID})">Acessar Quizz</div>
             <div class="button button--retornar" onclick="carregarPagina1()">Voltar para home</div>
         </div>`
-}
-
-function enviarQuiz() {
-    const posting = axios.post("https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes",quiz)
-    posting.then (guardarID);
 }
 
 function guardarID() {
@@ -327,4 +333,5 @@ function guardarID() {
     })
 }
 
-// ENTRANDO NO GET THEN ANTES DE POSTAR
+// SO TEM UM VALOR NO LOCAL STORAGE, TESTAR DEPOIS
+// OS QUIZES DO USUARIO ESTA APARECENDO NO QUIZZES DE TODOS TAMBEM
