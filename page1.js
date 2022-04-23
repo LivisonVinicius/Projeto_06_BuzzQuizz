@@ -1,4 +1,3 @@
-// ideia para depois, em vez de deixar a classe escondido nas paginas zerar o body e gerar o main .page do 0
 const body = document.querySelector("body");
 let page1;
 let quizzesServidor;
@@ -14,7 +13,7 @@ function carregarPagina1() {
 
 function renderizarQuizzes(response) {
     body.innerHTML = 
-       `<header><h1>BuzzQuizz</h1></header>
+       `<header><h1 onclick="carregarPagina1()">BuzzQuizz</h1></header>
         <main class="page1"></main>`
     page1 = document.querySelector(".page1")
 
@@ -44,25 +43,21 @@ function renderizarQuizzesUsuario() {
             <ul class="quiz__lista"></ul>
         </div>`
     let listaDeIDs=JSON.parse(localStorage.getItem("ID"))
-    for (let j = 0 ; j < listaDeIDs.length ; j++){
-        for (let i = 0 ; i < quizzesServidor.length ; i++) {
-            if(Number(quizzesServidor[i].id)==listaDeIDs[j]){
-                const image = quizzesServidor[i].image;
-                const title = quizzesServidor[i].title;
-                const lista = document.querySelector(".quiz--usuario .quiz__lista");
-
-                // COLOCAR FUNCAO PARA DELETAR E EDICAO NOS ION ICONS
-                lista.innerHTML += `
-                    <li class="quizz">
-                        <img src=${image} alt="">
-                        <div class="quizz-configuracao"><ion-icon class="edit" name="create-outline"></ion-icon><ion-icon class="trash" name="trash-outline"></ion-icon></div>
-                        <div class="gradiente" onclick="geraQuiz(${i})"></div>
-                        <h3>${title}</h3>
-                    </li>`
-            }
-        }
-    }
     
+    for (let j = 0 ; j < listaDeIDs.length ; j++){
+        const quizzesDoUsuario = axios.get(`https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes/${listaDeIDs[j]}`).then(response=>{const image = response.data.image;
+            const title = response.data.title;
+            const lista = document.querySelector(".quiz--usuario .quiz__lista");
+            lista.innerHTML += `
+                <li class="quizz">
+                    <img src=${image} alt="">
+                    <div class="quizz-configuracao"><ion-icon class="edit" name="create-outline"></ion-icon><ion-icon class="trash" name="trash-outline"></ion-icon></div>
+                    <div class="gradiente" onclick="geraQuiz(${listaDeIDs[j]})"></div>
+                    <h3>${title}</h3>
+                </li>
+            `
+        })
+    }
 }
 
 function renderizarQuizzesTodos() {

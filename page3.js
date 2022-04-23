@@ -4,7 +4,7 @@ let quiz;
 
 function carregarPagina3() {
     body.innerHTML = 
-       `<header><h1>BuzzQuizz</h1></header>
+       `<header><h1 onclick="carregarPagina1()">BuzzQuizz</h1></header>
         <main class="page3"></main>`
     page3 = document.querySelector(".page3");
 
@@ -51,30 +51,30 @@ function renderizarEtapaII() {
             <div class="sub-bloco">
                 <div class="forms forms--nome">
                     <h3>Pergunta ${i + 1}</h3>
-                    <input type="text" placeholder="Texto da pergunta"><p></p>
-                    <input value="#EC362D" type="color" placeholder="Cor de fundo da pergunta"><p></p>
+                    <input type="text" placeholder="Texto da pergunta"><p>ssss</p>
+                    <input type="color" placeholder="Cor de fundo da pergunta"><p>ssss</p>
                 </div>
                 <div class="forms forms--respostas-corretas">
                     <h3>Respostas corretas</h3>
                     <div class="forms__resposta">
-                        <input type="text" placeholder="Resposta correta"><p></p>
-                        <input type="url" placeholder="URL da imagem"><p></p>
+                        <input type="text" placeholder="Resposta correta"><p>ssss</p>
+                        <input type="url" placeholder="URL da imagem"><p>ssss</p>
                     </div>
                 </div>
                 <div class="forms forms--respostas-incorretas">
                     <h3>Respostas incorretas</h3>
                     <p></p>
                     <div class="forms__resposta">
-                        <input type="text" placeholder="Resposta incorreta 1"><p></p>
-                        <input type="url" placeholder="URL da imagem 1"><p></p>
+                        <input type="text" placeholder="Resposta incorreta 1"><p>ssss</p>
+                        <input type="url" placeholder="URL da imagem 1"><p>ssss</p>
                     </div>
                     <div class="forms__resposta">
-                        <input type="text" placeholder="Resposta incorreta 2"><p></p>
-                        <input type="url" placeholder="URL da imagem 2"><p></p>
+                        <input type="text" placeholder="Resposta incorreta 2"><p>ssss</p>
+                        <input type="url" placeholder="URL da imagem 2"><p>ssss</p>
                     </div>
                     <div class="forms__resposta">
-                        <input type="text" placeholder="Resposta incorreta 3"><p></p>
-                        <input type="url" placeholder="URL da imagem 3"><p></p>
+                        <input type="text" placeholder="Resposta incorreta 3"><p>ssss</p>
+                        <input type="url" placeholder="URL da imagem 3"><p>ssss</p>
                     </div>
                 </div>
             </div>
@@ -116,10 +116,10 @@ function renderizarEtapaIII() {
             <div class="sub-bloco">
                 <div class="forms forms--nome">
                     <h3>Nível ${i + 1}</h3>
-                    <input type="text" placeholder="Título do nível"><p></p>
-                    <input type="text" placeholder="% de acerto mínima"><p></p>
-                    <input type="url" placeholder="URL da imagem do nível"><p></p>
-                    <input type="text" placeholder="Descrição do nível"><p></p>
+                    <input type="text" placeholder="Título do nível"><p>ssss</p>
+                    <input type="text" placeholder="% de acerto mínima"><p>ssss</p>
+                    <input type="url" placeholder="URL da imagem do nível"><p>ssss</p>
+                    <input type="text" placeholder="Descrição do nível"><p>ssss</p>
                 </div>
             </div>
         </div>`
@@ -143,17 +143,20 @@ function trocarEtapaIII(bloco) {
 }
 
 //ETAPA IV //
+let keyDoQuiz;
+let IDdoQuiz;
 function enviarQuiz() {
     const posting = axios.post("https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes",quiz)
     posting.then(function (response){
-        let keyDoQuiz=response.key
-        guardarID(keyDoQuiz);
+        keyDoQuiz=response.data.key
+        IDdoQuiz = response.data.id
+        guardarID();
     });
 }
 
 function renderizarEtapaIV() {
     body.innerHTML = 
-       `<header><h1>BuzzQuizz</h1></header>
+       `<header><h1 onclick="carregarPagina1()">BuzzQuizz</h1></header>
         <main class="page3"></main>`
     page3 = document.querySelector(".page3");
 
@@ -165,25 +168,21 @@ function renderizarEtapaIV() {
             <div class="button button--retornar" onclick="carregarPagina1()">Voltar para home</div>
         </div>`
 }
-let IDdoQuiz;
-function guardarID(keyDoQuiz) {
-    const promise = axios.get("https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes")
-    promise.then(function(response){
-        IDdoQuiz = response.data[0].id
-        if(localStorage.length==0 || localStorage.getItem("ID")==null){
-            localStorage.setItem("ID",`[]`)
-            localStorage.setItem("key","[]")
-        }
-        let conteudoID = JSON.parse(localStorage.getItem("ID"));
-        let conteudoKey= JSON.parse(localStorage.getItem("key"));
-        conteudoID.push(keyDoQuiz);
-        conteudoID.push(IDdoQuiz);
-        conteudoKey= JSON.stringify(keyDoQuiz);
-        conteudoID=JSON.stringify(conteudoID);
-        localStorage.setItem(`ID`,conteudoID);
-        localStorage.setItem(`key`,keyDoQuiz);
-        renderizarEtapaIV();
-    })
+
+function guardarID() {
+    if(localStorage.length==0 || localStorage.getItem("ID")==null){
+        localStorage.setItem("ID",`[]`)
+        localStorage.setItem("keyDoQuiz","[]")
+    }
+    let conteudoID = JSON.parse(localStorage.getItem("ID"));
+    let conteudoKey= JSON.parse(localStorage.getItem("keyDoQuiz"));
+    conteudoKey.push(keyDoQuiz);
+    conteudoID.push(IDdoQuiz);
+    conteudoKey= JSON.stringify(conteudoKey);
+    conteudoID=JSON.stringify(conteudoID);
+    localStorage.setItem(`ID`,conteudoID);
+    localStorage.setItem(`keyDoQuiz`,conteudoKey);
+    renderizarEtapaIV();
 }
 
 // SO TEM UM VALOR NO LOCAL STORAGE, TESTAR DEPOIS

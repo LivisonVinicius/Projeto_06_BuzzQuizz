@@ -101,6 +101,9 @@ header{
     color: #EC362D;
     cursor: pointer;
 }
+h1{
+    cursor: pointer;
+}
 
 .quiz--usuario {
     margin-bottom: 48px;

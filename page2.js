@@ -14,10 +14,9 @@ function geraQuiz(posicaoID){
     promisePage2=axios.get(`https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes/${quizID}`)
     promisePage2.then(function(response){
         body.innerHTML = `
-        <header><h1>BuzzQuizz</h1></header>
+        <header><h1 onclick="carregarPagina1()">BuzzQuizz</h1></header>
         <main class="page2"></main>
         `
-
         pontuacao = 0;
         counter=0;
         counterRespostas=0;
@@ -34,7 +33,7 @@ function geraQuiz(posicaoID){
         while (counter < questionSelector.length){
             counterRespostas=0
             containerQuiz.innerHTML+=`
-            <li class="quizQuestion pergunta${counter}">
+            <li class="quizQuestion pergunta${counter} waiting">
                 <h3>${questionSelector[counter].title}</h3>
             </li>
             `
@@ -79,7 +78,8 @@ function selecionaResposta(selecionada,localPergunta){
         contadorLoop++
     }
     selecionada.classList.remove("esbraquicado")
-    setTimeout(scrollNext,2000,document.querySelector(`.pergunta${posicaoPergunta+1}`))
+    selecionada.closest(".waiting").classList.remove("waiting")
+    setTimeout(scrollNext,2000,document.querySelector(`.waiting`))
 }
 function parametro(){
     return Math.random()-0.5;
