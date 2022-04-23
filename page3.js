@@ -145,9 +145,9 @@ function trocarEtapaIII(bloco) {
 //ETAPA IV //
 function enviarQuiz() {
     const posting = axios.post("https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes",quiz)
-    posting.then(function (){
-        guardarID();
-        renderizarEtapaIV();
+    posting.then(function (response){
+        let keyDoQuiz=response.key
+        guardarID(keyDoQuiz);
     });
 }
 
@@ -161,24 +161,28 @@ function renderizarEtapaIV() {
        `<div class="etapa etapa--final">
             <h2>Seu quizz está pronto!</h2>
             <div class="quizz"><img src="${quiz.image}" alt=""><div class="gradiente"></div><h3>${quiz.title}</h3></div>
-            <div class="button button--avancar" onclick="geraQuiz(${quizID})">Acessar Quizz</div>
+            <div class="button button--avancar" onclick="geraQuiz(${IDdoQuiz})">Acessar Quizz</div>
             <div class="button button--retornar" onclick="carregarPagina1()">Voltar para home</div>
         </div>`
 }
-
-function guardarID() {
-    let IDdoQuiz;
-
+let IDdoQuiz;
+function guardarID(keyDoQuiz) {
     const promise = axios.get("https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes")
     promise.then(function(response){
         IDdoQuiz = response.data[0].id
         if(localStorage.length==0 || localStorage.getItem("ID")==null){
             localStorage.setItem("ID",`[]`)
+            localStorage.setItem("key","[]")
         }
-        let conteudoStorage = JSON.parse(localStorage.getItem("ID"));
-        conteudoStorage.push(IDdoQuiz);
-        conteudoStorage=JSON.stringify(conteudoStorage);
-        localStorage.setItem(`ID`,conteudoStorage);
+        let conteudoID = JSON.parse(localStorage.getItem("ID"));
+        let conteudoKey= JSON.parse(localStorage.getItem("key"));
+        conteudoID.push(keyDoQuiz);
+        conteudoID.push(IDdoQuiz);
+        conteudoKey= JSON.stringify(keyDoQuiz);
+        conteudoID=JSON.stringify(conteudoID);
+        localStorage.setItem(`ID`,conteudoID);
+        localStorage.setItem(`key`,keyDoQuiz);
+        renderizarEtapaIV();
     })
 }
 

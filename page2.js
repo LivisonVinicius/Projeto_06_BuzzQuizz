@@ -6,29 +6,27 @@ let promisePage2;
 let questionSelector;
 let pontuacao;
 let finalSelector;
-let mainPage2;
 
 let quizID;
 
 function geraQuiz(posicaoID){
     quizID = posicaoID;
-    promisePage2=axios.get('https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes')
+    promisePage2=axios.get(`https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes/${quizID}`)
     promisePage2.then(function(response){
         body.innerHTML = `
         <header><h1>BuzzQuizz</h1></header>
         <main class="page2"></main>
         `
-        mainPage2=document.querySelector("main");
 
         pontuacao = 0;
         counter=0;
         counterRespostas=0;
-        finalSelector=response.data[posicaoID].levels
-        questionSelector=response.data[posicaoID].questions;
+        finalSelector=response.data.levels
+        questionSelector=response.data.questions;
         document.querySelector(".page2").innerHTML+=`
         <li class="quizzTitle">
-            <img src="${response.data[posicaoID].image}" alt="Titulo do quizz">
-            <div><h2>${response.data[posicaoID].title}</h2></div>
+            <img src="${response.data.image}" alt="Titulo do quizz">
+            <div><h2>${response.data.title}</h2></div>
         </li>
         <div class="quizzContainer"></div>
         `
@@ -40,7 +38,7 @@ function geraQuiz(posicaoID){
                 <h3>${questionSelector[counter].title}</h3>
             </li>
             `
-            document.querySelector(`.pergunta${counter} h3`).style.backgroundColor =`${response.data[posicaoID].questions[counter].color}`
+            document.querySelector(`.pergunta${counter} h3`).style.backgroundColor =`${response.data.questions[counter].color}`
             respostaSelector=questionSelector[counter].answers.sort(parametro);
             while(counterRespostas < respostaSelector.length){
                 pergunta=document.querySelector(`.pergunta${counter}`);
@@ -88,7 +86,7 @@ function parametro(){
 }
 function scrollNext(local){
     if (local!== null){
-        local.scrollIntoView({behavior:"smooth", block : "end"})
+        local.scrollIntoView({behavior:"smooth", block : "center"})
     }else{
         let posicaoLvl=0
         pontuacao=Math.floor((pontuacao/document.querySelectorAll(".quizQuestion").length)*100)
@@ -117,5 +115,6 @@ function scrollNext(local){
         document.querySelector(".finalDoJogo").scrollIntoView({behavior : "smooth", block : "end"})
     }
 }
+
 
 // BUG NO SCROLL DO QUIZ, QUANDO RESPONDE A ULTIMA QUESTAO PRIMEIRO O SCROLL, APARECE O RESULTADO

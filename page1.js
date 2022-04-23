@@ -74,12 +74,13 @@ function renderizarQuizzesTodos() {
     for (var i = 0 ; i < quizzesServidor.length ; i++) {
         const image = quizzesServidor[i].image;
         const title = quizzesServidor[i].title;
+        const IDdoQuizdoServidor=quizzesServidor[i].id;
         const lista = document.querySelector(".quiz--todos .quiz__lista");
 
         lista.innerHTML += `
         <li class="quizz">
             <img src=${image} alt="">
-            <div class="gradiente" onclick="geraQuiz(${i})"></div>
+            <div class="gradiente" onclick="geraQuiz(${IDdoQuizdoServidor})"></div>
             <h3>${title}</h3>
         </li>`
     }
