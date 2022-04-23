@@ -194,10 +194,12 @@ function validarEtapaIII(bloco) {
     let validacao = true;
     let Acerto0Porcento = false;
 
-    const mensagensErro = bloco.closest(".etapa").querySelectorAll(".bloco p");
+    const mensagensErro = bloco.closest(".etapa").querySelectorAll("p");
     const inputErro = bloco.closest(".etapa").querySelectorAll(".bloco input");
     for (var i = 0 ; i < mensagensErro.length ; i++) {
         mensagensErro[i].innerHTML = "";
+    }
+    for (var i = 0 ; i < inputErro.length ; i++) {
         inputErro[i].style.backgroundColor = "#FFFFFF"
     }
 
@@ -227,7 +229,7 @@ function validarEtapaIII(bloco) {
             }
         }
         levelsUsuario.push(level.minValue);
-        if (level.minValue < 0 || level.minValue > 100) {
+        if (level.minValue < 0 || level.minValue > 100 || niveis[i].querySelector(".forms--nome input:nth-of-type(2)").value ==="") {
             niveis[i].querySelector("p:nth-of-type(2)").innerHTML = "A % de acerto mínima deve ser um número entre 0 e 100";
             niveis[i].querySelector("input:nth-of-type(2)").style.backgroundColor = "#FFE9E9"
             validacao = false;
@@ -255,7 +257,7 @@ function validarEtapaIII(bloco) {
         }
 
         if (level.text .length < 30) {
-            niveis[i].querySelector("p:nth-of-type(4)").innerHTML = "A URL da imagem deve ter formato de URL";
+            niveis[i].querySelector("p:nth-of-type(4)").innerHTML = "A descrição do nível deve ter no mínimo 30 caracteres";
             niveis[i].querySelector("input:nth-of-type(4)").style.backgroundColor = "#FFE9E9";
             validacao = false;
         }
