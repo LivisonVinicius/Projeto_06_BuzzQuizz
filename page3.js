@@ -116,10 +116,17 @@ function renderizarEtapaIII() {
             <div class="sub-bloco">
                 <div class="forms forms--nome">
                     <h3>Nível ${i + 1}</h3>
+<<<<<<< HEAD
                     <input type="text" placeholder="Título do nível"><p>ssss</p>
                     <input type="text" placeholder="% de acerto mínima"><p>ssss</p>
                     <input type="url" placeholder="URL da imagem do nível"><p>ssss</p>
                     <input type="text" placeholder="Descrição do nível"><p>ssss</p>
+=======
+                    <input type="text" placeholder="Título do nível"><p></p>
+                    <input type="text" placeholder="% de acerto mínima"><p></p>
+                    <input type="url" placeholder="URL da imagem do nível"><p></p>
+                    <textarea rows="7" placeholder="Descrição do nível"></textarea><p>
+>>>>>>> ac1f84f6f3d7b953670b7108ec60589406b8a54b
                 </div>
             </div>
         </div>`

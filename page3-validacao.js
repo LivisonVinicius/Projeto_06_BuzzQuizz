@@ -195,12 +195,16 @@ function validarEtapaIII(bloco) {
     let Acerto0Porcento = false;
 
     const mensagensErro = bloco.closest(".etapa").querySelectorAll("p");
-    const inputErro = bloco.closest(".etapa").querySelectorAll(".bloco input");
+    const inputErro = bloco.closest(".etapa").querySelectorAll("input");
+    const textAreaErro = bloco.closest(".etapa").querySelectorAll("textarea");
     for (var i = 0 ; i < mensagensErro.length ; i++) {
         mensagensErro[i].innerHTML = "";
     }
     for (var i = 0 ; i < inputErro.length ; i++) {
         inputErro[i].style.backgroundColor = "#FFFFFF"
+    }
+    for (var i = 0 ; i < textAreaErro.length ; i++) {
+        textAreaErro[i].style.backgroundColor = "#FFFFFF"
     }
 
     for (var i = 0 ; i < niveis.length ; i ++) {
@@ -213,7 +217,7 @@ function validarEtapaIII(bloco) {
         level.title = niveis[i].querySelector(".forms--nome input:nth-of-type(1)").value; 
         level.minValue = Number(niveis[i].querySelector(".forms--nome input:nth-of-type(2)").value);
         level.image = niveis[i].querySelector(".forms--nome input:nth-of-type(3)").value;
-        level.text = niveis[i].querySelector(".forms--nome input:nth-of-type(4)").value;
+        level.text = niveis[i].querySelector(".forms--nome textarea").value;
 
         if (level.title.length < 10) {
             niveis[i].querySelector("p:nth-of-type(1)").innerHTML = "O nível do quiz deve ter no mínimo 10 caracteres";
@@ -258,7 +262,7 @@ function validarEtapaIII(bloco) {
 
         if (level.text .length < 30) {
             niveis[i].querySelector("p:nth-of-type(4)").innerHTML = "A descrição do nível deve ter no mínimo 30 caracteres";
-            niveis[i].querySelector("input:nth-of-type(4)").style.backgroundColor = "#FFE9E9";
+            niveis[i].querySelector("textarea").style.backgroundColor = "#FFE9E9";
             validacao = false;
         }
         quiz.levels.push(level);
