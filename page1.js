@@ -43,6 +43,7 @@ function renderizarQuizzesUsuario() {
             <ul class="quiz__lista"></ul>
         </div>`
     let listaDeIDs=JSON.parse(localStorage.getItem("ID"))
+    let listaDeKeys=JSON.parse(localStorage.getItem("keyDoQuiz"))
     
     for (let j = 0 ; j < listaDeIDs.length ; j++){
         const quizzesDoUsuario = axios.get(`https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes/${listaDeIDs[j]}`).then(response=>{const image = response.data.image;
@@ -51,7 +52,7 @@ function renderizarQuizzesUsuario() {
             lista.innerHTML += `
                 <li class="quizz">
                     <img src=${image} alt="">
-                    <div class="quizz-configuracao"><ion-icon class="edit" name="create-outline"></ion-icon><ion-icon class="trash" name="trash-outline"></ion-icon></div>
+                    <div class="quizz-configuracao"><ion-icon class="edit" name="create-outline"></ion-icon><ion-icon class="trash" name="trash-outline" onclick="deleteQuiz('${listaDeIDs[j]} ', '${listaDeKeys[j]}','${j}')"></ion-icon></div>
                     <div class="gradiente" onclick="geraQuiz(${listaDeIDs[j]})"></div>
                     <h3>${title}</h3>
                 </li>
@@ -67,17 +68,20 @@ function renderizarQuizzesTodos() {
             <ul class="quiz__lista"></ul>
         </div>`
     for (var i = 0 ; i < quizzesServidor.length ; i++) {
-        const image = quizzesServidor[i].image;
-        const title = quizzesServidor[i].title;
-        const IDdoQuizdoServidor=quizzesServidor[i].id;
-        const lista = document.querySelector(".quiz--todos .quiz__lista");
+        let listaDeIDs=JSON.parse(localStorage.getItem("ID"))
+        if(!listaDeIDs.includes(quizzesServidor[i].id)){
+            const image = quizzesServidor[i].image;
+            const title = quizzesServidor[i].title;
+            const IDdoQuizdoServidor=quizzesServidor[i].id;
+            const lista = document.querySelector(".quiz--todos .quiz__lista");
 
-        lista.innerHTML += `
-        <li class="quizz">
-            <img src=${image} alt="">
-            <div class="gradiente" onclick="geraQuiz(${IDdoQuizdoServidor})"></div>
-            <h3>${title}</h3>
-        </li>`
+            lista.innerHTML += `
+            <li class="quizz">
+                <img src=${image} alt="">
+                <div class="gradiente" onclick="geraQuiz(${IDdoQuizdoServidor})"></div>
+                <h3>${title}</h3>
+            </li>`
+        } 
     }
 }
 
@@ -89,4 +93,24 @@ function renderizarTelaDeCarregamento() {
             <p class="overlay__texto">Carregando</p> 
         </div>
     `
+}
+function deleteQuiz(idDoDelete,keyDoQuizDeletado,posicaoLocalStorage){
+    const promiseDelete= axios.get(`https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes/${idDoDelete}`)
+    let quizDeletado;
+    promiseDelete.then(function(response){
+        quizDeletado=response.data
+    })
+    confirmacao =confirm("Tem certeza que quer deletar esse quiz?")
+    if(confirmacao){
+        const delQuiz=axios.delete(`https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes/${idDoDelete}`,{headers: { "Secret-Key": keyDoQuizDeletado}})
+        let conteudoID = JSON.parse(localStorage.getItem("ID"));
+        let conteudoKey= JSON.parse(localStorage.getItem("keyDoQuiz"));
+        conteudoKey=conteudoKey.splice(posicaoLocalStorage,posicaoLocalStorage);
+        conteudoID=conteudoID.splice(posicaoLocalStorage,posicaoLocalStorage);
+        conteudoKey= JSON.stringify(conteudoKey);
+        conteudoID=JSON.stringify(conteudoID);
+        localStorage.setItem(`ID`,conteudoID);
+        localStorage.setItem(`keyDoQuiz`,conteudoKey);
+        carregarPagina1()
+    }
 }
