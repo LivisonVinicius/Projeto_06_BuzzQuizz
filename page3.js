@@ -29,6 +29,9 @@ function renderizarEtapaI() {
 function trocarEtapaI(bloco) {
     if (validarEtapaI(bloco)) {
         renderizarEtapaII();
+        if  (edicao === true) {
+            editarEtapaII();
+        }
     } else {
         alert("Pelo menos um dos dados inseridos não são válidos!");
     }
@@ -51,30 +54,30 @@ function renderizarEtapaII() {
             <div class="sub-bloco">
                 <div class="forms forms--nome">
                     <h3>Pergunta ${i + 1}</h3>
-                    <input type="text" placeholder="Texto da pergunta"><p>ssss</p>
-                    <input type="color" placeholder="Cor de fundo da pergunta"><p>ssss</p>
+                    <input type="text" placeholder="Texto da pergunta"><p></p>
+                    <input type="color" value="#EC362D" placeholder="Cor de fundo da pergunta"><p></p>
                 </div>
                 <div class="forms forms--respostas-corretas">
                     <h3>Respostas corretas</h3>
                     <div class="forms__resposta">
-                        <input type="text" placeholder="Resposta correta"><p>ssss</p>
-                        <input type="url" placeholder="URL da imagem"><p>ssss</p>
+                        <input type="text" placeholder="Resposta correta"><p></p>
+                        <input type="url" placeholder="URL da imagem"><p></p>
                     </div>
                 </div>
                 <div class="forms forms--respostas-incorretas">
                     <h3>Respostas incorretas</h3>
                     <p></p>
                     <div class="forms__resposta">
-                        <input type="text" placeholder="Resposta incorreta 1"><p>ssss</p>
-                        <input type="url" placeholder="URL da imagem 1"><p>ssss</p>
+                        <input type="text" placeholder="Resposta incorreta 1"><p></p>
+                        <input type="url" placeholder="URL da imagem 1"><p></p>
                     </div>
                     <div class="forms__resposta">
-                        <input type="text" placeholder="Resposta incorreta 2"><p>ssss</p>
-                        <input type="url" placeholder="URL da imagem 2"><p>ssss</p>
+                        <input type="text" placeholder="Resposta incorreta 2"><p></p>
+                        <input type="url" placeholder="URL da imagem 2"><p></p>
                     </div>
                     <div class="forms__resposta">
-                        <input type="text" placeholder="Resposta incorreta 3"><p>ssss</p>
-                        <input type="url" placeholder="URL da imagem 3"><p>ssss</p>
+                        <input type="text" placeholder="Resposta incorreta 3"><p></p>
+                        <input type="url" placeholder="URL da imagem 3"><p></p>
                     </div>
                 </div>
             </div>
@@ -92,6 +95,9 @@ function selecionarPergunta(perguntaClicada) {
 function trocarEtapaII(bloco) {
     if (validarEtapaII(bloco)) {
         renderizarEtapaIII();
+        if (edicao === true) {
+            editarEtapaIII();
+        }
     } else {
         alert("Pelo menos um dos dados inseridos não são válidos!");
     }
@@ -116,17 +122,10 @@ function renderizarEtapaIII() {
             <div class="sub-bloco">
                 <div class="forms forms--nome">
                     <h3>Nível ${i + 1}</h3>
-<<<<<<< HEAD
-                    <input type="text" placeholder="Título do nível"><p>ssss</p>
-                    <input type="text" placeholder="% de acerto mínima"><p>ssss</p>
-                    <input type="url" placeholder="URL da imagem do nível"><p>ssss</p>
-                    <input type="text" placeholder="Descrição do nível"><p>ssss</p>
-=======
                     <input type="text" placeholder="Título do nível"><p></p>
                     <input type="text" placeholder="% de acerto mínima"><p></p>
                     <input type="url" placeholder="URL da imagem do nível"><p></p>
                     <textarea rows="7" placeholder="Descrição do nível"></textarea><p>
->>>>>>> ac1f84f6f3d7b953670b7108ec60589406b8a54b
                 </div>
             </div>
         </div>`
@@ -142,7 +141,12 @@ function selecionarNivel(nivelClicado) {
 }
 function trocarEtapaIII(bloco) {
     if (validarEtapaIII(bloco)) {
-        enviarQuiz();
+        if (edicao === true) {
+            editarQuiz();
+        }
+        if (edicao === false) {
+            enviarQuiz();
+        }
         renderizarTelaDeCarregamento();
     } else {
         alert("Pelo menos um dos dados inseridos não são válidos!");
@@ -191,6 +195,3 @@ function guardarID() {
     localStorage.setItem(`keyDoQuiz`,conteudoKey);
     renderizarEtapaIV();
 }
-
-// SO TEM UM VALOR NO LOCAL STORAGE, TESTAR DEPOIS
-// OS QUIZES DO USUARIO ESTA APARECENDO NO QUIZZES DE TODOS TAMBEM

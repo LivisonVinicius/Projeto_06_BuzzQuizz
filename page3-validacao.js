@@ -25,13 +25,11 @@ function validarEtapaI(bloco) {
         validacao = false;
     } 
 
-    // talvez criar uma função só para validar URL de imagem
     if (quiz.image === "") {
         mensagensErro[1].innerHTML = "A URL da imagem não pode estar vazia";
         inputErro[1].style.backgroundColor = "#FFE9E9"
     } else {
         if (!(/\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(quiz.image))) {
-            // TENTAR PROCURAR OUTRA FORMA PARA VALIDAR EXTENSAO DA IMAGEM
             mensagensErro[1].innerHTML = "A extensão da imagem não é aceita";
             inputErro[1].style.backgroundColor = "#FFE9E9"
             validacao = false;
@@ -88,10 +86,7 @@ function validarEtapaII(bloco) {
             perguntas[i].querySelector(".forms--nome p:nth-of-type(1)").innerHTML = "O título da pergunta deve ter no mínimo 20 caracteres";
             perguntas[i].querySelector(".forms--nome input:nth-of-type(1)").style.backgroundColor = "#FFE9E9";
             validacao = false;
-            // +2, porque a cor não precisa de validação, pq preto já é cor padrão
         }
-        
-        // descobrir como impedir que o usuário escolha uma cor parecida com a cor do texto da pergunta (branco)
 
         let answer = {
             text: "",

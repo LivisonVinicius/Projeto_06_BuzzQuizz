@@ -51,7 +51,7 @@ function renderizarQuizzesUsuario() {
             lista.innerHTML += `
                 <li class="quizz">
                     <img src=${image} alt="">
-                    <div class="quizz-configuracao"><ion-icon class="edit" name="create-outline"></ion-icon><ion-icon class="trash" name="trash-outline"></ion-icon></div>
+                    <div class="quizz-configuracao"><ion-icon class="edit" name="create-outline" onclick="carregarEdicao(${listaDeIDs[j]})"></ion-icon><ion-icon class="trash" name="trash-outline"></ion-icon></div>
                     <div class="gradiente" onclick="geraQuiz(${listaDeIDs[j]})"></div>
                     <h3>${title}</h3>
                 </li>
