@@ -14,6 +14,24 @@ input::placeholder {
     font-style: italic;
     color: #BABABA;
 }
+textarea {
+    margin-top: 14px;
+    border: 1px solid #D1D1D1;
+    border-radius: 5px;
+    padding: 12px 6px;
+    font-family: 'Roboto';
+    font-style: italic;
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 22px;
+}
+textarea:focus::placeholder {
+    color: transparent;
+}
+textarea::placeholder {
+    font-style: italic;
+    color: #BABABA;
+}
 
 .page3 {
     display: flex;

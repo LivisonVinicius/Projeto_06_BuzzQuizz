@@ -119,7 +119,7 @@ function renderizarEtapaIII() {
                     <input type="text" placeholder="Título do nível"><p></p>
                     <input type="text" placeholder="% de acerto mínima"><p></p>
                     <input type="url" placeholder="URL da imagem do nível"><p></p>
-                    <input type="text" placeholder="Descrição do nível"><p></p>
+                    <textarea rows="7" placeholder="Descrição do nível"></textarea><p>
                 </div>
             </div>
         </div>`
@@ -147,7 +147,6 @@ function enviarQuiz() {
     const posting = axios.post("https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes",quiz)
     posting.then(function (){
         guardarID();
-        renderizarEtapaIV();
     });
 }
 
@@ -161,17 +160,18 @@ function renderizarEtapaIV() {
        `<div class="etapa etapa--final">
             <h2>Seu quizz está pronto!</h2>
             <div class="quizz"><img src="${quiz.image}" alt=""><div class="gradiente"></div><h3>${quiz.title}</h3></div>
-            <div class="button button--avancar" onclick="geraQuiz(${quizID})">Acessar Quizz</div>
+            <div class="button button--avancar" onclick="geraQuiz(${IDdoQuiz})">Acessar Quizz</div>
             <div class="button button--retornar" onclick="carregarPagina1()">Voltar para home</div>
         </div>`
 }
 
-function guardarID() {
-    let IDdoQuiz;
+let IDdoQuiz;
 
+function guardarID() {
     const promise = axios.get("https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes")
     promise.then(function(response){
-        IDdoQuiz = response.data[0].id
+        IDdoQuiz = response.data[0].id;
+        renderizarEtapaIV();
         if(localStorage.length==0 || localStorage.getItem("ID")==null){
             localStorage.setItem("ID",`[]`)
         }
