@@ -2,11 +2,10 @@ function validarEtapaI(bloco) {
     let validacao = true;
     quiz = {
         title: "",
-	    image: "",
-	    questions: [],
+        image: "",
+        questions: [],
         levels: []
     }
-
     quiz.title = document.querySelector(".etapa--inicial .titulo").value;
     quiz.image = document.querySelector(".etapa--inicial .img-url").value;
     numeroPerguntas = Number(document.querySelector(".etapa--inicial .numero-perguntas").value);
