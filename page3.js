@@ -29,6 +29,9 @@ function renderizarEtapaI() {
 function trocarEtapaI(bloco) {
     if (validarEtapaI(bloco)) {
         renderizarEtapaII();
+        if  (edicao === true) {
+            editarEtapaII();
+        }
     } else {
         alert("Pelo menos um dos dados inseridos não são válidos!");
     }
@@ -52,7 +55,11 @@ function renderizarEtapaII() {
                 <div class="forms forms--nome">
                     <h3>Pergunta ${i + 1}</h3>
                     <input type="text" placeholder="Texto da pergunta"><p></p>
+<<<<<<< HEAD
+                    <input type="color" value="#EC362D" placeholder="Cor de fundo da pergunta"><p></p>
+=======
                     <input type="color" placeholder="Cor de fundo da pergunta"><p></p>
+>>>>>>> a0fe48b3c2785126963c9600536e3d32f375488f
                 </div>
                 <div class="forms forms--respostas-corretas">
                     <h3>Respostas corretas</h3>
@@ -92,6 +99,9 @@ function selecionarPergunta(perguntaClicada) {
 function trocarEtapaII(bloco) {
     if (validarEtapaII(bloco)) {
         renderizarEtapaIII();
+        if (edicao === true) {
+            editarEtapaIII();
+        }
     } else {
         alert("Pelo menos um dos dados inseridos não são válidos!");
     }
@@ -135,7 +145,12 @@ function selecionarNivel(nivelClicado) {
 }
 function trocarEtapaIII(bloco) {
     if (validarEtapaIII(bloco)) {
-        enviarQuiz();
+        if (edicao === true) {
+            editarQuiz();
+        }
+        if (edicao === false) {
+            enviarQuiz();
+        }
         renderizarTelaDeCarregamento();
     } else {
         alert("Pelo menos um dos dados inseridos não são válidos!");
@@ -184,6 +199,3 @@ function guardarID() {
     localStorage.setItem(`keyDoQuiz`,conteudoKey);
     renderizarEtapaIV();
 }
-
-
-// OS QUIZES DO USUARIO ESTA APARECENDO NO QUIZZES DE TODOS TAMBEM
