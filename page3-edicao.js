@@ -70,10 +70,19 @@ function editarEtapaIII() {
 function editarQuiz() {
     quiz.id = edicaoQuiz.id;
 
-    const editing = axios.put(`https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes/${edicaoQuiz.id}`,
-    {data: quiz}, {headers: {"Secret-Key": KEY}}
-    );
-    editing.then(renderizarEtapaIV);
+    const options = {
+        method: 'put',
+        url: `https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes/${edicaoQuiz.id}`,
+        data: quiz,
+        headers: {"Secret-Key": KEY}
+    }
+
+    axios(options).then(renderizarEtapaIV)
+
+    // const sendEdit = editing.put(`https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes/${edicaoQuiz.id}`,
+    // {data: quiz}, {headers: {"Secret-Key": KEY}}
+    // );
+    // sendEdit.then(renderizarEtapaIV);
 
 }
 

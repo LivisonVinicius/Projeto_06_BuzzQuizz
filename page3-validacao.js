@@ -11,10 +11,10 @@ function validarEtapaI(bloco) {
         }
     } else {
         quiz = {
-            title: "",
-            image: "",
-            questions: [],
-            levels: []
+        title: "",
+	    image: "",
+	    questions: [],
+        levels: []
         }
     }
 
