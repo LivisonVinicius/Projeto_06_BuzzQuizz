@@ -10,6 +10,9 @@ let finalSelector;
 let quizID;
 
 function geraQuiz(posicaoID){
+    if(!document.querySelectorAll(".esbraquicado").length){
+        renderizarTelaDeCarregamento();
+    }
     quizID = posicaoID;
     promisePage2=axios.get(`https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes/${quizID}`)
     promisePage2.then(function(response){
@@ -52,7 +55,6 @@ function geraQuiz(posicaoID){
             counter++
         }
     })
-    renderizarTelaDeCarregamento();
 }
 
 function selecionaResposta(selecionada,localPergunta){  
@@ -108,13 +110,14 @@ function scrollNext(local){
             <div><img src="${finalSelector[posicaoLvl].image}" alt="Imagem Final"><h4>${finalSelector[posicaoLvl].text}</h4></div>
         </div>
         <div class="button-container">
-            <div class="button button--reiniciar" onclick="geraQuiz(quizID)">Reiniciar Quiz</div>
+            <div class="button button--reiniciar" onclick="reiniciarQuiz(quizID)">Reiniciar Quiz</div>
             <div class="button button--retornar" onclick="carregarPagina1()">Voltar para home</div>
         </div>
         `
         document.querySelector(".finalDoJogo").scrollIntoView({behavior : "smooth", block : "end"})
     }
 }
-
-
-// BUG NO SCROLL DO QUIZ, QUANDO RESPONDE A ULTIMA QUESTAO PRIMEIRO O SCROLL, APARECE O RESULTADO
+function reiniciarQuiz(quizID){
+    document.querySelector(".quizzTitle").scrollIntoView({behavior : "smooth", block : "start"});
+    geraQuiz(quizID);  
+}

@@ -114,3 +114,4 @@ function deleteQuiz(idDoDelete,keyDoQuizDeletado,posicaoLocalStorage){
         carregarPagina1()
     }
 }
+// fazer o teste de verificar o objeto antes e depois de carregar a carregarPagina1
