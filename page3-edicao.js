@@ -68,21 +68,11 @@ function editarEtapaIII() {
 }
 
 function editarQuiz() {
-    quiz.id = edicaoQuiz.id;
-
-    const options = {
-        method: 'put',
-        url: `https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes/${edicaoQuiz.id}`,
-        data: quiz,
-        headers: {"Secret-Key": KEY}
-    }
-
-    axios(options).then(renderizarEtapaIV)
-
-    // const sendEdit = editing.put(`https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes/${edicaoQuiz.id}`,
-    // {data: quiz}, {headers: {"Secret-Key": KEY}}
-    // );
-    // sendEdit.then(renderizarEtapaIV);
+    console.log(quiz)
+    console.log(KEY)
+    let config={headers: { "Secret-Key": KEY}}
+    const editing = axios.put(`https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes/${edicaoQuiz.id}`, quiz ,config)
+    renderizarEtapaIV()
 
 }
 
