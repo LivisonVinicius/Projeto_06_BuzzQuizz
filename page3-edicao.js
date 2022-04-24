@@ -1,8 +1,10 @@
 let edicao;
+let KEY;
 let edicaoQuiz;
 
-function carregarEdicao(edicaoID) {
+function carregarEdicao(edicaoID,edicaoKEY) {
     edicao = true;
+    KEY = edicaoKEY;
 
     carregarPagina3();
 
@@ -66,24 +68,11 @@ function editarEtapaIII() {
 }
 
 function editarQuiz() {
-    const data = quiz;
+    quiz.id = edicaoQuiz.id;
 
-    const StorageID = localStorage.getItem("ID");
-    let key;
-    for (var i = 0 ; i < StorageID.length ; i ++ ) {
-        if (StorageID[i] === edicaoQuiz.id) {
-            const StorageKEY = localStorage.getItem("keyDoQuiz");
-            key = StorageKEY[i];
-        }
-    }
-
-    const config = {
-        headers: {
-            "Secret-Key": key,
-        }
-    }
-
-    const editing = axios.put(`https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes/${edicaoQuiz.id}`, data, config);
+    const editing = axios.put(`https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes/${edicaoQuiz.id}`,
+    {data: quiz}, {headers: {"Secret-Key": KEY}}
+    );
     editing.then(renderizarEtapaIV);
 
 }

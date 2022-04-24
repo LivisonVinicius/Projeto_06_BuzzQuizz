@@ -1,10 +1,21 @@
 function validarEtapaI(bloco) {
     let validacao = true;
-    quiz = {
-        title: "",
-	    image: "",
-	    questions: [],
-        levels: []
+
+    if (edicao === true) {
+        quiz = {
+            id: "",
+            title: "",
+            image: "",
+            questions: [],
+            levels: []
+        }
+    } else {
+        quiz = {
+            title: "",
+            image: "",
+            questions: [],
+            levels: []
+        }
     }
 
     quiz.title = document.querySelector(".etapa--inicial .titulo").value;
