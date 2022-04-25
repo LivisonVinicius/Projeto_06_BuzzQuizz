@@ -1,85 +1,74 @@
-function validarEtapaI(bloco) {
-    let validacao = true;
-    quiz = {
-        title: "",
-        image: "",
-        questions: [],
-        levels: []
+function resetarErros(mensagens, inputs, textAreas) {
+    for (var i = 0 ; i < mensagens.length ; i++) {
+        mensagens[i].innerHTML = "";
     }
-    quiz.title = document.querySelector(".etapa--inicial .titulo").value;
-    quiz.image = document.querySelector(".etapa--inicial .img-url").value;
-    numeroPerguntas = Number(document.querySelector(".etapa--inicial .numero-perguntas").value);
-    numeroNiveis = Number(document.querySelector(".etapa--inicial .numero-niveis").value);
+    for (var i = 0 ; i < inputs.length ; i++) {
+        inputs[i].style.backgroundColor = "#FFFFFF"
+    }
+    for (var i = 0 ; i < textAreas.length ; i++) {
+        textAreas[i].style.backgroundColor = "#FFFFFF"
+    }
+}
 
-    const mensagensErro = bloco.closest(".etapa").querySelectorAll("p");
-    const inputErro = bloco.closest(".etapa").querySelectorAll("input");
-    for (var i = 0 ; i < mensagensErro.length ; i++) {
-        mensagensErro[i].innerHTML = "";
-        inputErro[i].style.backgroundColor = "#FFFFFF"
+function validarEtapaI() {
+    let validacao = true;
+
+    const mensagens = document.querySelectorAll("p");
+    const inputs = document.querySelectorAll("input");
+    resetarErros(mensagens, inputs, [])
+    
+    quiz = {
+        title:     document.querySelector("input:nth-of-type(1)").value,
+        image:     document.querySelector("input:nth-of-type(2)").value,
+        questions: [],
+        levels:    []
     }
+    numeroPerguntas = Number(document.querySelector("input:nth-of-type(3)").value);
+    numeroNiveis    = Number(document.querySelector("input:nth-of-type(4)").value);
 
     if (quiz.title.length < 20 || quiz.title.length > 65) {
-        mensagensErro[0].innerHTML = "O título do quiz deve ter no mínimo 20 e no máximo 65 caracteres";
-        inputErro[0].style.backgroundColor = "#FFE9E9"
+        mensagens[0].innerHTML = "O título do quiz deve ter no mínimo 20 e no máximo 65 caracteres";
+        inputs[0].style.backgroundColor = "#FFE9E9"
         validacao = false;
     } 
 
-    if (quiz.image === "") {
-        mensagensErro[1].innerHTML = "A URL da imagem não pode estar vazia";
-        inputErro[1].style.backgroundColor = "#FFE9E9"
-    } else {
-        if (!(/\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(quiz.image))) {
-            mensagensErro[1].innerHTML = "A extensão da imagem não é aceita";
-            inputErro[1].style.backgroundColor = "#FFE9E9"
-            validacao = false;
-        } 
-        try {
-            const imgURL = new URL(document.querySelector(".etapa--inicial .img-url").value);
-        } catch (_) {
-            mensagensErro[1].innerHTML = "A URL da imagem deve ter formato de URL";
-            inputErro[1].style.backgroundColor = "#FFE9E9"
-            validacao = false;  
-        }
+    let mensagem = mensagens[1];
+    let input = inputs[1]
+    if (!validarImagem(quiz.image, mensagem, input)) {
+        validacao = false;
     }
 
     if (numeroPerguntas < 3) {
-        mensagensErro[2].innerHTML = "O quiz deve ter no mínimo 3 perguntas";
-        inputErro[2].style.backgroundColor = "#FFE9E9"
+        mensagens[2].innerHTML = "O quiz deve ter no mínimo 3 perguntas";
+        inputs[2].style.backgroundColor = "#FFE9E9"
         validacao = false;
     } 
 
     if (numeroNiveis < 2) {
-        mensagensErro[3].innerHTML = "O quiz deve ter no mínimo 2 níveis";
-        inputErro[3].style.backgroundColor = "#FFE9E9"
+        mensagens[3].innerHTML = "O quiz deve ter no mínimo 2 níveis";
+        inputs[3].style.backgroundColor = "#FFE9E9"
         validacao = false;
     }
 
     return validacao;
 }
 
-function validarEtapaII(bloco) {
+function validarEtapaII() {
     quiz.questions = []
     let validacao = true;
-    const perguntas = document.querySelectorAll(".bloco .sub-bloco:nth-of-type(2)");
-
-    const mensagensErro = bloco.closest(".etapa").querySelectorAll("p");
-    const inputErro = bloco.closest(".etapa").querySelectorAll("input");
-    for (var i = 0 ; i < mensagensErro.length ; i++) {
-        mensagensErro[i].innerHTML = "";
-    }
-    for (var i = 0 ; i < inputErro.length ; i++) {
-        inputErro[i].style.backgroundColor = "#FFFFFF"
-    }
     
+    const mensagens = document.querySelectorAll("p");
+    const inputs = document.querySelectorAll("input");
+    resetarErros(mensagens, inputs, [])
+    
+    const perguntas = document.querySelectorAll(".sub-bloco:nth-of-type(2)");
 
     for (var i = 0 ; i < perguntas.length ; i ++) {
         const question = {
-            title: "",
-			color: "",
+            title: perguntas[i].querySelector(".forms--nome input:nth-of-type(1)").value,
+			color: perguntas[i].querySelector(".forms--nome input:nth-of-type(2)").value,
 			answers: []
         }
-        question.title = perguntas[i].querySelector(".forms--nome input:nth-of-type(1)").value;
-        question.color = perguntas[i].querySelector(".forms--nome input:nth-of-type(2)").value;
 
         if (question.title.length < 20) {
             perguntas[i].querySelector(".forms--nome p:nth-of-type(1)").innerHTML = "O título da pergunta deve ter no mínimo 20 caracteres";
@@ -88,49 +77,35 @@ function validarEtapaII(bloco) {
         }
 
         let answer = {
-            text: "",
-			image: "",
+            text: respostaCorreta.querySelector("input:nth-of-type(1)").value,
+			image: respostaCorreta.querySelector("input:nth-of-type(2)").value,
 			isCorrectAnswer: true
         }
-        const respostaCorreta = perguntas[i].querySelector(".forms--respostas-corretas .forms__resposta");
-        answer.text = respostaCorreta.querySelector("input:nth-of-type(1)").value;
-        answer.image = respostaCorreta.querySelector("input:nth-of-type(2)").value;
+        question.answers.push(answer);
+
+        
+        const respostaCorreta = perguntas[i].querySelector(".forms--respostas-corretas");
         if (answer.text === "") {
             respostaCorreta.querySelector("p:nth-of-type(1)").innerHTML = "O texto da resposta não pode estar vazio";
             respostaCorreta.querySelector("input:nth-of-type(1)").style.backgroundColor = "#FFE9E9";
             validacao = false;
         }
-        if (answer.image === "") {
-            respostaCorreta.querySelector("p:nth-of-type(2)").innerHTML = "A URL da imagem da resposta não pode estar vazio";
-            respostaCorreta.querySelector("input:nth-of-type(2)").style.backgroundColor = "#FFE9E9";
+        let mensagem = respostaCorreta.querySelector("p:nth-of-type(2)");
+        let input = respostaCorreta.querySelector("input:nth-of-type(2)");
+        if (!validarImagem(answer.image, mensagem, input)) {
             validacao = false;
-        } else {
-            if (!(/\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(answer.image))) {
-                respostaCorreta.querySelector("p:nth-of-type(2)").innerHTML = "A extensão da imagem não é aceita";
-                respostaCorreta.querySelector("input:nth-of-type(2)").style.backgroundColor = "#FFE9E9";
-                validacao = false;
-            }
-            try {
-                const imgURL = new URL(respostaCorreta.querySelector("input:nth-of-type(2)").value);
-            } catch (_) {
-                respostaCorreta.querySelector("p:nth-of-type(2)").innerHTML = "A URL da imagem deve ter formato de URL";
-                respostaCorreta.querySelector("input:nth-of-type(2)").style.backgroundColor = "#FFE9E9";
-                validacao = false;  
-            }
         }
-        question.answers.push(answer);
         
         let minimoRespostaIncorreta = false;
         const respostasIncorretas = perguntas[i].querySelectorAll(".forms--respostas-incorretas .forms__resposta");
         for (var x = 0 ; x < respostasIncorretas.length ; x ++) {
             let booleano = true;
             answer = {
-                text: "",
-                image: "",
+                text: respostasIncorretas[x].querySelector("input:nth-of-type(1)").value,
+                image: respostasIncorretas[x].querySelector("input:nth-of-type(2)").value,
                 isCorrectAnswer: false
             }
-            answer.text = respostasIncorretas[x].querySelector("input:nth-of-type(1)").value;
-            answer.image = respostasIncorretas[x].querySelector("input:nth-of-type(2)").value;
+
             if (answer.text === "" && answer.image === "") {
                 continue;
             } 
@@ -140,29 +115,13 @@ function validarEtapaII(bloco) {
                 booleano = false;
                 validacao = false;
             }
-            if (answer.image === "") {
-                respostasIncorretas[x].querySelector("p:nth-of-type(2)").innerHTML = "A URL da imagem da resposta não pode estar vazio";
-                respostasIncorretas[x].querySelector("input:nth-of-type(2)").style.backgroundColor = "#FFE9E9";
+            let mensagem = respostasIncorretas[x].querySelector("p:nth-of-type(2)");
+            let input = respostasIncorretas[x].querySelector("input:nth-of-type(2)");
+            if (!validarImagem(answer.image, mensagem, input)) {
                 booleano = false;
                 validacao = false;
-            } else {
-                if (!(/\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(answer.image))) {
-                    respostasIncorretas[x].querySelector("p:nth-of-type(2)").innerHTML = "A extensão da imagem não é aceita";
-                    respostasIncorretas[x].querySelector("input:nth-of-type(2)").style.backgroundColor = "#FFE9E9";
-                    booleano = false;
-                    validacao = false;
-                }
-                try {
-                    const imgURL = new URL(respostasIncorretas[x].querySelector("input:nth-of-type(2)").value);
-                } catch (_) {
-                    respostasIncorretas[x].querySelector("p:nth-of-type(2)").innerHTML = "A URL da imagem deve ter formato de URL";
-                    respostasIncorretas[x].querySelector("input:nth-of-type(2)").style.backgroundColor = "#FFE9E9";
-                    booleano = false;
-                    validacao = false;  
-                } 
             }
 
-            //OUTRO JEITO PARA ADICIONAR RESPOSTA< PQ VALIDACAO JA TA FALSE EM OUTRAS ETAPAS DE VALIDACAO
             if (booleano === true) {
                 question.answers.push(answer);
                 minimoRespostaIncorreta = true;
@@ -183,35 +142,24 @@ function validarEtapaII(bloco) {
 
 function validarEtapaIII(bloco) {
     quiz.levels = [];
-    const niveis = document.querySelectorAll(".bloco .sub-bloco:nth-of-type(2)");
     let levelsUsuario = []
     let validacao = true;
     let Acerto0Porcento = false;
 
-    const mensagensErro = bloco.closest(".etapa").querySelectorAll("p");
-    const inputErro = bloco.closest(".etapa").querySelectorAll("input");
-    const textAreaErro = bloco.closest(".etapa").querySelectorAll("textarea");
-    for (var i = 0 ; i < mensagensErro.length ; i++) {
-        mensagensErro[i].innerHTML = "";
-    }
-    for (var i = 0 ; i < inputErro.length ; i++) {
-        inputErro[i].style.backgroundColor = "#FFFFFF"
-    }
-    for (var i = 0 ; i < textAreaErro.length ; i++) {
-        textAreaErro[i].style.backgroundColor = "#FFFFFF"
-    }
+    const mensagens = document.querySelectorAll("p");
+    const inputs = document.querySelectorAll("input");
+    const textAreas = document.querySelectorAll("textarea");
+    resetarErros(mensagens, inputs, textAreas)
+    
+    const niveis = document.querySelectorAll(".sub-bloco:nth-of-type(2)");
 
     for (var i = 0 ; i < niveis.length ; i ++) {
         const level = {
-            title: "",
-            image: "",
-            text: "",
-            minValue: 0
+            title: niveis[i].querySelector("input:nth-of-type(1)").value,
+            minValue: Number(niveis[i].querySelector("input:nth-of-type(2)").value),
+            image: niveis[i].querySelector("input:nth-of-type(3)").value,
+            text: niveis[i].querySelector("textarea").value,
         }
-        level.title = niveis[i].querySelector(".forms--nome input:nth-of-type(1)").value; 
-        level.minValue = Number(niveis[i].querySelector(".forms--nome input:nth-of-type(2)").value);
-        level.image = niveis[i].querySelector(".forms--nome input:nth-of-type(3)").value;
-        level.text = niveis[i].querySelector(".forms--nome textarea").value;
 
         if (level.title.length < 10) {
             niveis[i].querySelector("p:nth-of-type(1)").innerHTML = "O nível do quiz deve ter no mínimo 10 caracteres";
@@ -219,7 +167,6 @@ function validarEtapaIII(bloco) {
             validacao = false;
         }
 
-        // CRIAR UMA LISTA COM OS NIVEIS COLOCADOS PELO USUARIO, SE FOR IGUAL, MSG DE ERRO
         for (var x = 0 ; x < levelsUsuario.length ; x ++) {
             if (levelsUsuario[x] === level.minValue && levelsUsuario !== []) {
                 niveis[i].querySelector("p:nth-of-type(2)").innerHTML = "Essa % de acerto mínima já foi atríbuida para outro nível";
@@ -227,7 +174,7 @@ function validarEtapaIII(bloco) {
             }
         }
         levelsUsuario.push(level.minValue);
-        if (level.minValue < 0 || level.minValue > 100 || niveis[i].querySelector(".forms--nome input:nth-of-type(2)").value ==="") {
+        if (level.minValue < 0 || level.minValue > 100 || niveis[i].querySelector("input:nth-of-type(2)").value ==="") {
             niveis[i].querySelector("p:nth-of-type(2)").innerHTML = "A % de acerto mínima deve ser um número entre 0 e 100";
             niveis[i].querySelector("input:nth-of-type(2)").style.backgroundColor = "#FFE9E9"
             validacao = false;
@@ -236,22 +183,10 @@ function validarEtapaIII(bloco) {
             Acerto0Porcento = true;
         }
 
-        if (level.image === "") {
-            niveis[i].querySelector("p:nth-of-type(3)").innerHTML = "A URL da imagem não pode estar vazia";
-            niveis[i].querySelector("input:nth-of-type(3)").style.backgroundColor = "#FFE9E9"
-        } else {
-            if (!(/\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(level.image))) {
-                niveis[i].querySelector("p:nth-of-type(3)").innerHTML = "A extensão da imagem não é aceita";
-                niveis[i].querySelector("input:nth-of-type(3)").style.backgroundColor = "#FFE9E9";
-                validacao = false;
-            }
-            try {
-                const imgURL = new URL(niveis[i].querySelector(".forms--nome input:nth-of-type(3)").value);
-            } catch (_) {
-                niveis[i].querySelector("p:nth-of-type(3)").innerHTML = "A URL da imagem deve ter formato de URL";
-                niveis[i].querySelector("input:nth-of-type(3)").style.backgroundColor = "#FFE9E9";
-                validacao = false;  
-            }
+        let mensagem = niveis[i].querySelector("p:nth-of-type(3)");
+        let input = niveis[i].querySelector("input:nth-of-type(3)");
+        if (!validarImagem(level.image, mensagem, input)) {
+            validacao = false;
         }
 
         if (level.text .length < 30) {
@@ -269,4 +204,26 @@ function validarEtapaIII(bloco) {
         validacao = false;
     }
     return validacao;
+}
+
+function validarImagem (image, message, input) {
+    if (image === "") {
+        message.innerHTML = "A URL da imagem não pode estar vazia";
+        input.style.backgroundColor = "#FFE9E9"
+        return false;
+    } else {
+        if (!(/\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(image))) {
+            message.innerHTML = "A extensão da imagem não é aceita";
+            input.style.backgroundColor = "#FFE9E9"
+            return false;
+        } 
+        try {
+            const imgURL = new URL(image);
+        } catch (_) {
+            message.innerHTML = "A URL da imagem deve ter formato de URL";
+            input.style.backgroundColor = "#FFE9E9"
+            return false;
+        }
+    }
+    return true;
 }
