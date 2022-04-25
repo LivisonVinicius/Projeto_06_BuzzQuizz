@@ -72,7 +72,7 @@ function renderizarQuizzesTodos() {
         </div>`
     for (var i = 0 ; i < quizzesServidor.length ; i++) {
         let listaDeIDs=JSON.parse(localStorage.getItem("ID"))
-        if(!listaDeIDs.includes(quizzesServidor[i].id)){
+        if(listaDeIDs==null||!listaDeIDs.includes(quizzesServidor[i].id) ){
             const image = quizzesServidor[i].image;
             const title = quizzesServidor[i].title;
             const IDdoQuizdoServidor=quizzesServidor[i].id;
@@ -114,7 +114,8 @@ function deleteQuiz(idDoDelete,keyDoQuizDeletado,posicaoLocalStorage){
         conteudoID=JSON.stringify(conteudoID);
         localStorage.setItem(`ID`,conteudoID);
         localStorage.setItem(`keyDoQuiz`,conteudoKey);
-        carregarPagina1()
+        delQuiz.then(carregarPagina1())
     }
 }
+// SOLUCIONAR O BUG DE DELETAR O ERRADO NO STORAGE
 // fazer o teste de verificar o objeto antes e depois de carregar a carregarPagina1
