@@ -68,11 +68,9 @@ function editarEtapaIII() {
 }
 
 function editarQuiz() {
-    console.log(quiz)
-    console.log(KEY)
     let config={headers: { "Secret-Key": KEY}}
-    const editing = axios.put(`https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes/${edicaoQuiz.id}`, quiz ,config)
-    renderizarEtapaIV()
+    const editing = axios.put(`https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes/${edicaoQuiz.id}`, quiz ,config);
+    editing.then(renderizarEtapaIV)
 
 }
 
