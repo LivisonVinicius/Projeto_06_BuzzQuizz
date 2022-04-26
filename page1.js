@@ -108,8 +108,8 @@ function deleteQuiz(idDoDelete,keyDoQuizDeletado,posicaoLocalStorage){
         const delQuiz=axios.delete(`https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes/${idDoDelete}`,{headers: { "Secret-Key": keyDoQuizDeletado}})
         let conteudoID = JSON.parse(localStorage.getItem("ID"));
         let conteudoKey= JSON.parse(localStorage.getItem("keyDoQuiz"));
-        conteudoKey=conteudoKey.splice(posicaoLocalStorage,posicaoLocalStorage);
-        conteudoID=conteudoID.splice(posicaoLocalStorage,posicaoLocalStorage);
+        conteudoKey.splice(posicaoLocalStorage,1);
+        conteudoID.splice(posicaoLocalStorage,1);
         conteudoKey= JSON.stringify(conteudoKey);
         conteudoID=JSON.stringify(conteudoID);
         localStorage.setItem(`ID`,conteudoID);
