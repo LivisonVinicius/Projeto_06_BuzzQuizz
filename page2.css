@@ -38,6 +38,12 @@ li{
     justify-content: center;
     align-items: center;
 }
+.quizzTitle h2 {
+    width: 100%;
+    max-width: 760px;
+    text-align: center;
+    word-wrap: break-word;
+}
 
 .quizQuestion {
     width: 100%;
