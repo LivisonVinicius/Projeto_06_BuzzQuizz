@@ -4,6 +4,7 @@ let edicaoQuiz;
 
 function carregarEdicao(edicaoID,edicaoKEY) {
     edicao = true;
+    IDdoQuiz = edicaoID;
     KEY = edicaoKEY;
 
     carregarPagina3();
@@ -69,8 +70,8 @@ function editarEtapaIII() {
 
 function editarQuiz() {
     let config={headers: { "Secret-Key": KEY}}
-    const editing = axios.put(`https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes/${edicaoQuiz.id}`, quiz ,config)
-    renderizarEtapaIV()
+    const editing = axios.put(`https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes/${edicaoQuiz.id}`, quiz ,config);
+    editing.then(renderizarEtapaIV)
 
 }
 

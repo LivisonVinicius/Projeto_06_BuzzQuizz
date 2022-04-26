@@ -23,11 +23,11 @@ function renderizarEtapaI() {
                 <input class="numero-perguntas" type="number" placeholder="Quantidade de perguntas do quizz"><p></p>
                 <input class="numero-niveis" type="number" placeholder="Quantidade de níveis do quizz"><p></p>
             </div>
-            <div class="button button--avancar" onclick="trocarEtapaI(this)">Prosseguir pra criar perguntas</div>
+            <div class="button button--avancar" onclick="trocarEtapaI()">Prosseguir pra criar perguntas</div>
         </div>`
 }
-function trocarEtapaI(bloco) {
-    if (validarEtapaI(bloco)) {
+function trocarEtapaI() {
+    if (validarEtapaI()) {
         renderizarEtapaII();
         if  (edicao === true) {
             editarEtapaII();
@@ -112,7 +112,7 @@ function renderizarEtapaIII() {
             <p></p>
         </div>`
     const etapa = document.querySelector(".etapa--niveis");
-    // NAO ESQUECER DE TROCAR O INPUT DA DESCRICAO PARA O OUTRA CAIXA DE TEXTO GIGANTE********************************************************************************************************
+
     for (var i = 0 ; i < numeroNiveis ; i ++) {
         etapa.innerHTML += 
        `<div class="bloco">
@@ -130,7 +130,7 @@ function renderizarEtapaIII() {
             </div>
         </div>`
     }
-    etapa.innerHTML += `<div class="button button--avancar" onclick="trocarEtapaIII(this)">FinalizarQuiz</div>`
+    etapa.innerHTML += `<div class="button button--avancar" onclick="trocarEtapaIII()">FinalizarQuiz</div>`
 }
 function selecionarNivel(nivelClicado) {
     const nivelSelecionado = document.querySelector(".etapa--niveis .selecionado");
@@ -139,8 +139,8 @@ function selecionarNivel(nivelClicado) {
     }
     nivelClicado.closest(".bloco").classList.add("selecionado");
 }
-function trocarEtapaIII(bloco) {
-    if (validarEtapaIII(bloco)) {
+function trocarEtapaIII() {
+    if (validarEtapaIII()) {
         if (edicao === true) {
             editarQuiz();
         } else {
