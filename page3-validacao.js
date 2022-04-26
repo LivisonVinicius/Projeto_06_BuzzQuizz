@@ -76,6 +76,7 @@ function validarEtapaII() {
             validacao = false;
         }
 
+        const respostaCorreta = perguntas[i].querySelector(".forms--respostas-corretas");
         let answer = {
             text: respostaCorreta.querySelector("input:nth-of-type(1)").value,
 			image: respostaCorreta.querySelector("input:nth-of-type(2)").value,
@@ -84,7 +85,6 @@ function validarEtapaII() {
         question.answers.push(answer);
 
         
-        const respostaCorreta = perguntas[i].querySelector(".forms--respostas-corretas");
         if (answer.text === "") {
             respostaCorreta.querySelector("p:nth-of-type(1)").innerHTML = "O texto da resposta não pode estar vazio";
             respostaCorreta.querySelector("input:nth-of-type(1)").style.backgroundColor = "#FFE9E9";
@@ -101,7 +101,7 @@ function validarEtapaII() {
         for (var x = 0 ; x < respostasIncorretas.length ; x ++) {
             let booleano = true;
             answer = {
-                text: respostasIncorretas[x].querySelector("input:nth-of-type(1)").value,
+                text:  respostasIncorretas[x].querySelector("input:nth-of-type(1)").value,
                 image: respostasIncorretas[x].querySelector("input:nth-of-type(2)").value,
                 isCorrectAnswer: false
             }

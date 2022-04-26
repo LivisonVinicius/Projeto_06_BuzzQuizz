@@ -4,6 +4,7 @@ let edicaoQuiz;
 
 function carregarEdicao(edicaoID,edicaoKEY) {
     edicao = true;
+    IDdoQuiz = edicaoID;
     KEY = edicaoKEY;
 
     carregarPagina3();
