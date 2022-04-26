@@ -117,5 +117,3 @@ function deleteQuiz(idDoDelete,keyDoQuizDeletado,posicaoLocalStorage){
         delQuiz.then(carregarPagina1())
     }
 }
-// SOLUCIONAR O BUG DE DELETAR O ERRADO NO STORAGE
-// fazer o teste de verificar o objeto antes e depois de carregar a carregarPagina1
